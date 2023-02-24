@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  *
  * @author ANTONIO FERNANDO SANZ PANS
- * @fecha 18/02/2022
+ * @tema PROG07
  */
 public class CuerpoCeleste implements Serializable {
 
@@ -23,7 +23,14 @@ public class CuerpoCeleste implements Serializable {
 
     public CuerpoCeleste() {
     }
-
+    
+    /**
+     * Crear un cuerpo celeste
+     * @param codigoCuerpo
+     * @param nombre
+     * @param tipoObjeto
+     * @param diametro 
+     */
     public CuerpoCeleste(short codigoCuerpo, String nombre, String tipoObjeto, int diametro) {
         try {
             //excepcionCuerpoCeleste(nombre, diametro, codigoCuerpo);
@@ -76,7 +83,6 @@ public class CuerpoCeleste implements Serializable {
 
     /**
      * Numero entero de 3 digitos
-     *
      * @param codigoCuerpo
      */
     public void setCodigoCuerpo(short codigoCuerpo) {
@@ -90,7 +96,6 @@ public class CuerpoCeleste implements Serializable {
 
     /**
      * Cadena de texto maximo 15
-     *
      * @param nombre
      */
     public void setNombre(String nombre) {
@@ -104,7 +109,6 @@ public class CuerpoCeleste implements Serializable {
 
     /**
      * Cadena de texto (planeta, planeta enano, luna)
-     *
      * @param tipoObjeto
      */
     public void setTipoObjeto(String tipoObjeto) {
@@ -113,7 +117,6 @@ public class CuerpoCeleste implements Serializable {
 
     /**
      * Numero entero 6 digitos, sin decimales
-     *
      * @param diametro
      */
     public void setDiametro(int diametro) {

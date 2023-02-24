@@ -4,7 +4,6 @@
  */
 package Ejercicio3.maestre;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -22,8 +21,12 @@ public class Matriz {
 
     //Constructores
     public Matriz() {
-    }
 
+    }
+    /**
+     * Crear la matriz
+     * @param n int
+     */
     public Matriz(int n) {
         this.matriz = new int[n][n];
         this.maximos = new int[n];
@@ -65,6 +68,9 @@ public class Matriz {
     }
 
     //Metodos
+    /**
+     * Rellenar la matriz con numeros aleatorios
+     */
     private void rellenarMatrizAleatoria() {
         Random r = new Random();
         for (int i = 0; i < tamanoMatriz; i++) {
@@ -73,7 +79,9 @@ public class Matriz {
             }
         }
     }
-
+    /**
+     * Mostrar la matriz por consola
+     */
     public void mostrarMatriz() {
         for (int i = 0; i < tamanoMatriz; i++) {
             for (int j = 0; j < tamanoMatriz; j++) {
@@ -83,6 +91,9 @@ public class Matriz {
         }
     }
 
+    /**
+     * Buscar maximos
+     */
     private void buscarMaximos() {
         int maximoFila;
         for (int i = 0; i < tamanoMatriz; i++) {
@@ -90,12 +101,15 @@ public class Matriz {
             for (int j = 0; j < tamanoMatriz; j++) {
                 if (matriz[i][j] > maximoFila) {
                     maximoFila = matriz[i][j];
-                     this.maximos[i] = maximoFila;
+                    this.maximos[i] = maximoFila;
                 }
             }
         }
     }
     
+    /**
+     * Mostrar los maximos
+     */
     public void mostrarMaximos() {
         this.buscarMaximos();
 
@@ -105,6 +119,10 @@ public class Matriz {
         System.out.println();
     }
 
+    /**
+     * Calcular la media entre los maximos
+     * @return 
+     */
     public double calcularMediaMaximos() {
         int sumaMaximos = 0;
         for (int i = 0; i < tamanoMatriz; i++) {

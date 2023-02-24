@@ -7,7 +7,7 @@ package Ejercicio4.maestre;
 /**
  *
  * @author ANTONIO FERNANDO SANZ PANS
- * @fecha 18/02/2022
+ * @tema PROG07
  */
 public class ExcepcionLongitudCodigoCuerpo extends Exception{
         public ExcepcionLongitudCodigoCuerpo(String msg) {

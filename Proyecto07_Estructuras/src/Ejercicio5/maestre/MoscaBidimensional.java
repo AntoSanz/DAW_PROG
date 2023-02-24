@@ -5,6 +5,7 @@
 package Ejercicio5.maestre;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -83,8 +84,10 @@ public class MoscaBidimensional {
                 System.out.println("No has cazado la mosca en 5 rondas. ¡Inténtalo de nuevo!");
 
             }
-        } catch (Exception exception) {
-            System.out.println("Input no válido. Solo se contemplan valores numéricos positivos.");
+        } catch (InputMismatchException ex) {
+            System.out.println("ERROR: Solo se admiten valores numéricos.");
+        } catch (Exception ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
     }
 

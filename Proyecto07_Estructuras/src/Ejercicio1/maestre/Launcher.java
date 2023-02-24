@@ -4,12 +4,13 @@
  */
 package Ejercicio1.maestre;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  *
  * @author ANTONIO FERNANDO SANZ PANS
- * @fecha 17/02/2022
+ * @tema PROG07
  */
 public class Launcher {
 
@@ -18,16 +19,25 @@ public class Launcher {
         runMenu();
     }
 
+    /**
+     * Mensaje de bienvenida
+     */
     private static void welcome() {
         System.out.println("Programa hecho por Antonio Sanz Pans");
         System.out.println("Fecha: 17/02/2023");
     }
 
+    /**
+     * Lanzar el menu
+     */
     public static void runMenu() {
         printMenu();
         selectMenuOption();
     }
 
+    /**
+     * Mostrar texto para el menu
+     */
     private static void printMenu() {
         System.out.println("Que utilidad quieres probar?");
         System.out.println("1. unirCadenas");
@@ -37,37 +47,45 @@ public class Launcher {
         System.out.println("5. Exit");
     }
 
+    /**
+     * Seleccionar una opcion del menú
+     */
     private static void selectMenuOption() {
-        //TODO: Controlar que solo se introduzcan numeros
-
-        Scanner sc = new Scanner(System.in);
-        byte option = sc.nextByte();
-        switch (option) {
-            case 1:
-                joinStrings();
-                break;
-            case 2:
-                countLetterInWord();
-                break;
-            case 3:
-                isPalindrome();
-                break;
-            case 4:
-                reverseString();
-                break;
-            case 5: 
-                Exit();
-                break;
-            default:
-                System.out.println("Opción no encontrada, selecciona otra.");
-                runMenu();
-                break;
+        try {
+            Scanner sc = new Scanner(System.in);
+            byte option = sc.nextByte();
+            switch (option) {
+                case 1:
+                    joinStrings();
+                    break;
+                case 2:
+                    countLetterInWord();
+                    break;
+                case 3:
+                    isPalindrome();
+                    break;
+                case 4:
+                    reverseString();
+                    break;
+                case 5:
+                    Exit();
+                    break;
+                default:
+                    System.out.println("Opción no encontrada, selecciona otra.");
+                    runMenu();
+                    break;
+            }
+        } catch (InputMismatchException ex) {
+            System.out.println("ERROR: Solo se admiten valores numéricos.");
+        } catch (Exception ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
     }
 
+    /**
+     * Unir strings
+     */
     private static void joinStrings() {
-        //TODO: Controlar que solo se introduzcan letras
-
         Scanner sc = new Scanner(System.in);
         System.out.println("Cadena 1:");
         String str1 = sc.nextLine();
@@ -79,11 +97,12 @@ public class Launcher {
         runMenu();
     }
 
+    /**
+     * Contar las veces que una letra aparece en una palabra
+     */
     private static void countLetterInWord() {
-        //TODO: Controlar que solo se introduzcan letras
         Scanner sc = new Scanner(System.in);
         System.out.println("Indica que letra quieres buscar:");
-        //TODO: Controlar que solo se introduzca una letra.
         String letter = sc.nextLine();
         System.out.println("Indica la palabra donde quieres buscar la letra \"" + letter + "\"");
         String word = sc.nextLine();
@@ -93,6 +112,9 @@ public class Launcher {
         runMenu();
     }
 
+    /**
+     * Comprobar si un string es palindromo
+     */
     private static void isPalindrome() {
         //TODO: Controlar que solo se introduzcan letras
 
@@ -104,6 +126,9 @@ public class Launcher {
         runMenu();
     }
 
+    /**
+     * Dar la vuelta a un string
+     */
     private static void reverseString() {
         //TODO: Controlar que solo se introduzcan letras
 
@@ -115,6 +140,9 @@ public class Launcher {
         runMenu();
     }
 
+    /**
+     * Salir
+     */
     private static void Exit() {
         System.out.println("Fin del programa. Hasta pronto!");
         System.exit(0);

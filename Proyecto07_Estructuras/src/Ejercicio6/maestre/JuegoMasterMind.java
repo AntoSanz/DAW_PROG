@@ -4,6 +4,7 @@
  */
 package Ejercicio6.maestre;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class JuegoMasterMind {
         System.out.println(WELCOME_MESSAGE);
         System.out.println("El programa ha generado tres números aleatorios distintos entre 0 y 9.");
         System.out.println("Tienes" + MAX_INTENTOS + " oportunidades para adivinar los números y sus posiciones correctas.");
-        
+
         // Generar los números aleatorios
         Scanner scanner = new Scanner(System.in);
         int[] numerosRandom = generarArrayAleatorios();
@@ -42,8 +43,10 @@ public class JuegoMasterMind {
 
             // Se han agotado los intentos
             System.out.println("Lo siento, has perdido. Los números eran " + numerosRandom[0] + ", " + numerosRandom[1] + " y " + numerosRandom[2] + ".");
+        } catch (InputMismatchException ex) {
+            System.out.println("ERROR: Solo se admiten valores numéricos.");
         } catch (Exception ex) {
-            System.out.println("ERROR: Se ha introducido un valor no permitido. FIN DEL JUEGO");
+            System.out.println("ERROR: " + ex.getMessage());
         }
     }
 

@@ -7,7 +7,7 @@ package Ejercicio1.maestre;
 /**
  *
  * @author ANTONIO FERNANDO SANZ PANS
- * @fecha 17/02/2022
+ * @tema PROG07
  */
 public class UtilidadesCadenas {
 
@@ -47,10 +47,10 @@ public class UtilidadesCadenas {
      */
     public static String esPalindromo(String cadena) {
         //Elimino espacios y pongo en minuscula
-        String cadenaSinEspacios = cadena.replaceAll("\\s", "").toLowerCase(); 
+        String cadenaSinEspacios = cadena.replaceAll("\\s", "").toLowerCase();
         StringBuilder sb = new StringBuilder(cadenaSinEspacios);
         //Le doy la vuelta
-        String cadenaAlReves = sb.reverse().toString(); 
+        String cadenaAlReves = sb.reverse().toString();
         //Comparo con un ternario las dos cadenas de texto
         String resultado = (cadenaSinEspacios.equalsIgnoreCase(cadenaAlReves)) ? "Es palíndromo" : "No es palíndromo";
         return resultado;

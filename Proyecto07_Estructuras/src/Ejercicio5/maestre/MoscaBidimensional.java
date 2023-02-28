@@ -32,7 +32,6 @@ public class MoscaBidimensional {
             //Una vez establecidos los parámetros básicos, crear la matriz.
             char[][] panel = new char[nFilaPanel][nColPanel];
             //Establecer la posición de las moscas
-            System.out.println("DEBUG");
             int filaMosca = 0, colMosca = 0;
             for (int i = 0; i < nroMoscas; i++) {
                 // Colocamos cada mosca en una posición aleatoria del panel
@@ -40,7 +39,6 @@ public class MoscaBidimensional {
                 colMosca = random.nextInt(nColPanel);
                 panel[filaMosca][colMosca] = 'M';
             }
-            System.out.println("debug");
             // Inicializamos el contador de rondas
             int numRondas = 0;
             while (numRondas < 5) {

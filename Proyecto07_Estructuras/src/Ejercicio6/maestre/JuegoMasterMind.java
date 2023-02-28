@@ -106,6 +106,8 @@ public class JuegoMasterMind {
         }
         if (aciertos == 3) {
             result = "Felicidades, has ganado en " + intentos + " intentos!";
+            System.out.println("Fin del programa. ¡Hasta pronto!");
+            System.exit(0);
         } else {
             //Pista          
             result = numerosUsuario[0] + " " + numerosUsuario[1] + " " + numerosUsuario[2] + "\t" + result;

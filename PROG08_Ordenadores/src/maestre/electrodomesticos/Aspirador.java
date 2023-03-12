@@ -76,10 +76,45 @@ public class Aspirador implements Reparable {
         }
         System.out.println("Limpieza terminada.");
     }
-    
+
+    /**
+     * Enciende una aspiradora
+     */
+    public void encender() {
+        try {
+            System.out.println("Encendiendo...");
+            for (int i = 0; i < 3; i++) {
+                Thread.sleep(1 * 1000);
+                System.out.println("...");
+            }
+            this.encendido = true;
+            System.out.println("Aspiradora encendida");
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Apaga una aspiradora
+     */
+    public void apagar() {
+        try {
+            System.out.println("Apagando...");
+            for (int i = 0; i < 3; i++) {
+                Thread.sleep(1 * 1000);
+                System.out.println("...");
+            }
+            this.encendido = false;
+            System.out.println("Aspiradora apagada");
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+
     //INTERFACE
     /**
-     * Muestra unas almohadillas y un mensaje indicando que el ordenador se está reparando
+     * Muestra unas almohadillas y un mensaje indicando que el ordenador se está
+     * reparando
      */
     @Override
     public void reparar() {

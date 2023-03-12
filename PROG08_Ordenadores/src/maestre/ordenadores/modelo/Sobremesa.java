@@ -4,11 +4,13 @@
  */
 package maestre.ordenadores.modelo;
 
+import maestre.general.interfaces.Reparable;
+
 /**
  *
  * @author ANTONIO SANZ PANS
  */
-public class Sobremesa extends Ordenador {
+public class Sobremesa extends Ordenador implements Reparable {
 
     private String placaBase;
     private String tarjetaGrafica;
@@ -73,6 +75,15 @@ public class Sobremesa extends Ordenador {
             strRAM = strRAM + "*";
         }
         return strRAM;
+    }
+
+    /**
+     * Muestra unos asteriscos y unmensaje indicando que el ordenador se está
+     * reparando
+     */
+    @Override
+    public void reparar() {
+        System.out.println("*** El ordenador se está reparando. ***");
     }
 
 }

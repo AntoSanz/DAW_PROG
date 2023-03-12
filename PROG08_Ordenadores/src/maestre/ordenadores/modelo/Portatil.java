@@ -4,13 +4,14 @@
  */
 package maestre.ordenadores.modelo;
 
+import maestre.general.interfaces.Reparable;
 import maestre.ordenadores.excepciones.ExcepcionMaxPulgadas;
 
 /**
  *
  * @author ANTONIO SANZ PANS
  */
-public class Portatil extends Ordenador {
+public class Portatil extends Ordenador implements Reparable {
 
     private final byte MAX_PULGADAS = 99;
     private short MAX_BATERIA;
@@ -119,5 +120,14 @@ public class Portatil extends Ordenador {
         if (pulgadas > this.MAX_PULGADAS) {
             throw new ExcepcionMaxPulgadas("ERROR PULGADAS: máximo superado (" + this.MAX_PULGADAS + ")");
         }
+    }
+    
+    //INTERFACE
+    /**
+     * Muestra unos asteriscos y unmensaje indicando que el ordenador se está reparando
+     */
+    @Override
+    public void reparar() {
+        System.out.println("*** El ordenador se está reparando. ***");
     }
 }

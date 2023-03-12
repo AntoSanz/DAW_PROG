@@ -11,7 +11,7 @@ import maestre.ordenadores.excepciones.ExcepcionMaxPulgadas;
  *
  * @author ANTONIO SANZ PANS
  */
-public class Portatil extends Ordenador implements Reparable {
+public class Portatil extends Ordenador implements Reparable, Comparable<Portatil> {
 
     private final byte MAX_PULGADAS = 99;
     private short MAX_BATERIA;
@@ -121,13 +121,32 @@ public class Portatil extends Ordenador implements Reparable {
             throw new ExcepcionMaxPulgadas("ERROR PULGADAS: máximo superado (" + this.MAX_PULGADAS + ")");
         }
     }
-    
+
     //INTERFACE
     /**
-     * Muestra unos asteriscos y unmensaje indicando que el ordenador se está reparando
+     * Muestra unos asteriscos y unmensaje indicando que el ordenador se está
+     * reparando
      */
     @Override
     public void reparar() {
-        System.out.println("*** El ordenador se está reparando. ***");
+        System.out.println("*** El portatil se está reparando. ***");
+    }
+
+    /**
+     * Devuelve que ordenador es mas grande
+     *
+     * @param o
+     * @return (int) 0 si son iguales, -1 si este ordenador es mas grande, 1 si
+     * el ordenador proporcionado es mas grande
+     */
+    @Override
+    public int compareTo(Portatil o) {
+        if (this.pulgadas < o.getPulgadas()) {
+            return -1;
+        } else if (this.pulgadas > o.getPulgadas()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

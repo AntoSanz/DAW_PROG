@@ -83,7 +83,7 @@ public class Sobremesa extends Ordenador implements Reparable {
      */
     @Override
     public void reparar() {
-        System.out.println("*** El ordenador se está reparando. ***");
+        System.out.println("*** El sobremesa se está reparando. ***");
     }
 
 }

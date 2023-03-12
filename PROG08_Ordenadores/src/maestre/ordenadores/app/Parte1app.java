@@ -13,7 +13,7 @@ import maestre.ordenadores.modelo.Sobremesa;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class Parte1app {
 

@@ -97,7 +97,6 @@ public class Portatil extends Ordenador implements Reparable, Comparable<Portati
         return strRAM;
     }
 
-    //EXCEPCIONES
     public String cargar(short carga) {
         this.duracionBateria = (short) (this.duracionBateria + carga);
         if (this.duracionBateria > this.MAX_BATERIA) {

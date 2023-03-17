@@ -8,6 +8,7 @@ import java.util.Objects;
 import maestre.ordenadores.excepciones.ExcepcionLongitudNroSerie;
 import maestre.ordenadores.excepciones.ExcepcionMaxMemoriaRam;
 import maestre.ordenadores.excepciones.ExcepcionMaxNucleos;
+import maestre.ordenadores.excepciones.ExcepcionTipoDiscoDuro;
 
 /**
  *
@@ -18,15 +19,15 @@ abstract public class Ordenador {
     private final byte MAX_LONG_NRO_SERIE = 20;
     private final byte MAX_MEMORIA_RAM = 99;
     private final byte MAX_NUCLEOS = 99;
-    private final String OPCIONES_DISCO_DURO[] = {"HDD", "SDD"};
+    private final String OPCIONES_DISCO_DURO[] = {"HDD", "SSD"};
 
-    private String nroSerie; //MAX: 20
+    private String nroSerie;
     private String marca;
     private String modelo;
-    private byte memoriaRAM; //MAX: 2
+    private byte memoriaRAM;
     private String procesador;
-    private byte nucleos; // MAX: 2
-    private String tipoDiscoDuro; //HDD / SDD
+    private byte nucleos;
+    private String tipoDiscoDuro;
     private Boolean arrancado;
 
     //CONSTRUCTORES
@@ -38,14 +39,14 @@ abstract public class Ordenador {
             maxLongitudNroSerie(nroSerie);
             maxMemoriaRam(memoriaRAM);
             maxNucleos(nucleos);
-
+            tipoDiscoDuro(tipoDiscoDuro);
             this.nroSerie = nroSerie;
             this.marca = marca;
             this.modelo = modelo;
             this.memoriaRAM = memoriaRAM;
             this.procesador = procesador;
             this.nucleos = nucleos;
-            this.tipoDiscoDuro = tipoDiscoDuro;
+            this.tipoDiscoDuro = tipoDiscoDuro.toUpperCase();
             this.arrancado = false;
         } catch (ExcepcionLongitudNroSerie | ExcepcionMaxMemoriaRam | ExcepcionMaxNucleos ex) {
             throw new AssertionError(ex);
@@ -198,6 +199,12 @@ abstract public class Ordenador {
     private void maxLongitudNroSerie(String nroSerie) throws ExcepcionLongitudNroSerie {
         if (nroSerie.length() > this.MAX_LONG_NRO_SERIE) {
             throw new ExcepcionLongitudNroSerie("ERROR RAM: máximo superado (" + this.MAX_LONG_NRO_SERIE + ")");
+        }
+    }
+
+    private void tipoDiscoDuro(String hdd) throws ExcepcionTipoDiscoDuro {
+        if (hdd != OPCIONES_DISCO_DURO[0] && hdd != OPCIONES_DISCO_DURO[1]) {
+            throw new ExcepcionTipoDiscoDuro("ERROR HDD: El tipo del disco duro no está permitido");
         }
     }
 }

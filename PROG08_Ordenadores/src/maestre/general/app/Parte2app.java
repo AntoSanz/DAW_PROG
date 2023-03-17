@@ -28,8 +28,8 @@ public class Parte2app {
     }
 
     private static void generarArrayReparables() {
-        Portatil miPortatil1 = new Portatil("c0043ns", "HP", "OMEN 16", (byte) 8, "AMD Ryzen 7", (byte) 4, "SSD", (byte) 22, (short) 250);
-        Portatil miPortatil2 = new Portatil("15IAH7", "Lenovo ", "IdeaPad Gaming 3", (byte) 4, "Intel Core i5", (byte) 2, "HDD", (byte) 23, (short) 200);
+        Portatil miPortatil1 = new Portatil("c0043ns", "HP", "OMEN 16", (byte) 8, "AMD Ryzen 7", (byte) 4, "SSD", (byte) 22);
+        Portatil miPortatil2 = new Portatil("15IAH7", "Lenovo ", "IdeaPad Gaming 3", (byte) 4, "Intel Core i5", (byte) 2, "HDD", (byte) 23);
         Sobremesa miSobremesa1 = new Sobremesa("10023724", "PcCom", "Gold Elite", (byte) 8, "Intel Core i5", (byte) 6, "HDD", "MSI B560M PRO-VDH", "GeForce RTX2060");
         Sobremesa miSobremesa2 = new Sobremesa("657XES", "MSI", "MAG Infinite S3", (byte) 16, "Intel Core i7", (byte) 8, "SSD", "MSI MPG B550 GAMING PLUS", "GeForce RTX3060");
         Aspirador miAspirador1 = new Aspirador("Dyson v15", (byte) 3, (byte) 88);
@@ -44,9 +44,9 @@ public class Parte2app {
     }
 
     private static void generarArrayPortatiles() {
-        Portatil miPortatil1 = new Portatil("15IAH7", "Lenovo ", "IdeaPad Gaming 3", (byte) 4, "Intel Core i5", (byte) 2, "HDD", (byte) 23, (short) 200);
-        Portatil miPortatil2 = new Portatil("c0043ns", "HP", "OMEN 16", (byte) 8, "AMD Ryzen 7", (byte) 4, "SSD", (byte) 22, (short) 250);
-        Portatil miPortatil3 = new Portatil("M6500QC", "ASUS", "VivoBook Pro 15", (byte) 16, "AMD Ryzen 7", (byte) 8, "SSD", (byte) 24, (short) 300);
+        Portatil miPortatil1 = new Portatil("15IAH7", "Lenovo ", "IdeaPad Gaming 3", (byte) 4, "Intel Core i5", (byte) 2, "HDD", (byte) 23);
+        Portatil miPortatil2 = new Portatil("c0043ns", "HP", "OMEN 16", (byte) 8, "AMD Ryzen 7", (byte) 4, "SSD", (byte) 22);
+        Portatil miPortatil3 = new Portatil("M6500QC", "ASUS", "VivoBook Pro 15", (byte) 16, "AMD Ryzen 7", (byte) 8, "SSD", (byte) 24);
 
         portatiles[0] = miPortatil1;
         portatiles[1] = miPortatil2;

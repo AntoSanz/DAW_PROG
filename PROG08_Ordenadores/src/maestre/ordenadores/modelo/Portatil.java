@@ -14,7 +14,7 @@ import maestre.ordenadores.excepciones.ExcepcionMaxPulgadas;
 public class Portatil extends Ordenador implements Reparable, Comparable<Portatil> {
 
     private final byte MAX_PULGADAS = 99;
-    private short MAX_BATERIA;
+    private short MAX_BATERIA = 300;
     private final byte MIN_BATERIA = 0;
 
     private byte pulgadas; //MAX: 2
@@ -25,14 +25,13 @@ public class Portatil extends Ordenador implements Reparable, Comparable<Portati
         super();
     }
 
-    public Portatil(String nroSerie, String marca, String modelo, byte memoriaRAM, String procesador, byte nucleos, String tipoDiscoDuro, byte pulgadas, short duracionBateria) {
+    public Portatil(String nroSerie, String marca, String modelo, byte memoriaRAM, String procesador, byte nucleos, String tipoDiscoDuro, byte pulgadas) {
 
         super(nroSerie, marca, modelo, memoriaRAM, procesador, nucleos, tipoDiscoDuro);
         try {
             maxPulgadas(pulgadas);
             this.pulgadas = pulgadas;
-            this.duracionBateria = duracionBateria;
-            this.MAX_BATERIA = duracionBateria;
+            this.duracionBateria = MAX_BATERIA;
         } catch (ExcepcionMaxPulgadas ex) {
             throw new AssertionError(ex);
         } catch (Exception ex) {

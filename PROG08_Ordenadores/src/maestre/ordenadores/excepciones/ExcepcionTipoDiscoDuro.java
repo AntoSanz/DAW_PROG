@@ -6,7 +6,7 @@ package maestre.ordenadores.excepciones;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class ExcepcionTipoDiscoDuro extends Exception {
 

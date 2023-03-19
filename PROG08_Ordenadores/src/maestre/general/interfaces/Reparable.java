@@ -6,7 +6,7 @@ package maestre.general.interfaces;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public interface Reparable {
     public void reparar ();

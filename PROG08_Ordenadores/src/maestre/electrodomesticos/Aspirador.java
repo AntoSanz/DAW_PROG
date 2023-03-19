@@ -8,7 +8,7 @@ import maestre.general.interfaces.Reparable;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class Aspirador implements Reparable {
 

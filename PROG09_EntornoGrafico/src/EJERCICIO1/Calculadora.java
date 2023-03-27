@@ -10,7 +10,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import static java.awt.Font.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  *
@@ -49,7 +48,7 @@ public class Calculadora extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Calculadora();
+        Calculadora calculadora = new Calculadora();
     }
 
     /**
@@ -103,19 +102,16 @@ public class Calculadora extends JFrame {
     private void eventosNumeros() {
         for (int i = 0; i < 10; i++) {
             int numBoton = numerosBotones[i];
-            botones[numBoton].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //Comprobar si es un nuevo numero o en su lugar hay ya numeros en el box
-                    //nuevoNumero = (display.getText() == "0") ? true : false;
-                    if (nuevoNumero) {
-                        if (!textoBotones[numBoton].equals("0")) {
-                            display.setText(textoBotones[numBoton]);
-                            nuevoNumero = false;
-                        }
-                    } else {
-                        display.setText(display.getText() + textoBotones[numBoton]);
+            botones[numBoton].addActionListener((ActionEvent e) -> {
+                //Comprobar si es un nuevo numero o en su lugar hay ya numeros en el box
+                //nuevoNumero = (display.getText() == "0") ? true : false;
+                if (nuevoNumero) {
+                    if (!textoBotones[numBoton].equals("0")) {
+                        display.setText(textoBotones[numBoton]);
+                        nuevoNumero = false;
                     }
+                } else {
+                    display.setText(display.getText() + textoBotones[numBoton]);
                 }
             });
         }
@@ -125,14 +121,11 @@ public class Calculadora extends JFrame {
      * Funcionamiento del botón de decimales
      */
     private void eventoDecimal() {
-        botones[14].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!puntoDecimal) {
-                    display.setText(display.getText() + textoBotones[14]);
-                    puntoDecimal = true;
-                    nuevoNumero = false;
-                }
+        botones[14].addActionListener((ActionEvent e) -> {
+            if (!puntoDecimal) {
+                display.setText(display.getText() + textoBotones[14]);
+                puntoDecimal = true;
+                nuevoNumero = false;
             }
         });
 
@@ -143,20 +136,18 @@ public class Calculadora extends JFrame {
      */
     private void eventosOperaciones() {
         for (int numBoton : operacionesBotones) {
-            botones[numBoton].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (operacion == "") {
-                        //Obtenemos el boton que queremos que 
-                        operacion = textoBotones[numBoton];
-                        //Obtener el numero que está por pantalla como double
-                        operando1 = Double.parseDouble(display.getText());
-                        display.setText("");
-                        puntoDecimal = false;
-                    } else {
-                        operando2 = Double.parseDouble(display.getText());
-                        resultado();
-                    }
+            botones[numBoton].addActionListener((ActionEvent e) -> {
+                if (operacion.equals("")) {
+                    //Obtenemos el boton que queremos que
+                    operacion = textoBotones[numBoton];
+                    //Obtener el numero que está por pantalla como double
+                    operando1 = Double.parseDouble(display.getText());
+                    display.setText("0");
+                    nuevoNumero = true;
+                    puntoDecimal = false;
+                } else {
+                    operando2 = Double.parseDouble(display.getText());
+                    resultado();
                 }
             });
         }
@@ -166,11 +157,8 @@ public class Calculadora extends JFrame {
      * Funcionamiento del boton C
      */
     private void eventoLimpiar() {
-        botones[12].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearScreen();
-            }
+        botones[12].addActionListener((ActionEvent e) -> {
+            clearScreen();
         });
     }
 
@@ -193,10 +181,7 @@ public class Calculadora extends JFrame {
             }
             display.setText(String.valueOf(resultado));
             resetOperandos();
-        } catch (ArithmeticException e) {
-            System.out.println("Imposible dividir por 0");
-            clearScreen();
-        } catch (ExcepcionDivisionPorCero e) {
+        } catch (ArithmeticException | ExcepcionDivisionPorCero e) {
             System.out.println("Imposible dividir por 0");
             clearScreen();
         }

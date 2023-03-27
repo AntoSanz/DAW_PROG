@@ -4,6 +4,7 @@
  */
 package EJERCICIO1;
 
+import EJERCICIO1.Excepciones.ExcepcionDivisionPorCero;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class Calculadora extends JFrame {
 
@@ -177,18 +178,28 @@ public class Calculadora extends JFrame {
      * Calculo del resultado
      */
     private void resultado() {
-        switch (operacion) {
-            case "+" ->
-                resultado = operando1 + operando2;
-            case "-" ->
-                resultado = operando1 - operando2;
-            case "*" ->
-                resultado = operando1 * operando2;
-            case "/" ->
-                resultado = operando1 / operando2;
+        try {
+            switch (operacion) {
+                case "+" ->
+                    resultado = operando1 + operando2;
+                case "-" ->
+                    resultado = operando1 - operando2;
+                case "*" ->
+                    resultado = operando1 * operando2;
+                case "/" -> {
+                    DivisionPorCero(operando2, operacion);
+                    resultado = operando1 / operando2;
+                }
+            }
+            display.setText(String.valueOf(resultado));
+            resetOperandos();
+        } catch (ArithmeticException e) {
+            System.out.println("Imposible dividir por 0");
+            clearScreen();
+        } catch (ExcepcionDivisionPorCero e) {
+            System.out.println("Imposible dividir por 0");
+            clearScreen();
         }
-        display.setText(String.valueOf(resultado));
-        resetOperandos();
     }
 
     /**
@@ -209,6 +220,12 @@ public class Calculadora extends JFrame {
         resetOperandos();
         display.setText("0");
 
+    }
+
+    static void DivisionPorCero(double divisor, String operador) throws ExcepcionDivisionPorCero {
+        if (divisor == 0 && operador.equals("/")) {
+            throw new ExcepcionDivisionPorCero("ERROR: La nota está fuera del rango (0-10)");
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

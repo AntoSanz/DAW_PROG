@@ -4,452 +4,242 @@
  */
 package EJERCICIO2.funcionalidad;
 
+import static EJERCICIO2.funcionalidad.FuncionalidadArchivos.*;
 import EJERCICIO2.funcionalidad.modelos.CuerpoCeleste;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ANTONIO SANZ PANS
+ * @author ANTO
  */
-public class Funcionalidad {
+public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
 
     static ArrayList<CuerpoCeleste> cuerposCelestes = new ArrayList<>();
-    static final String FILE_URL_SS = "./sistemasolar.dat";
-    static final String CC_TIPO_1 = "Planeta";
-    static final String CC_TIPO_2 = "Planeta enano";
-    static final String CC_TIPO_3 = "Luna";
-    static final String CUERPOS_CELESTES_NOT_FOUND = "No se han encontrado cuerpos celestes.";
+    static final String FILE_URL_SS = "./src/EJERCICIO2/data/sistemasolar.dat";
 
-    public static void main(String[] args) {
-        welcomeMessage();
-        getFileData(FILE_URL_SS);
-        runMenu();
-    }
-
-    private static void welcomeMessage() {
-        final String MSG_BIENVENIDA = "Bienvenido a la TAREA 06 de ANTONIO SANZ";
-        System.out.println(MSG_BIENVENIDA);
-    }
-
-    /**
-     * Obtiene los datos almacenados en un archivo
-     *
-     * @param fileName Nombre del archivo donde estan los datos almacenados
-     */
-    private static void getFileData(String urlFile) {
+    //Metodos publicos para acceder a la funcionalidad privada
+    //Los metodos privados son nombreDelMetodoPublico().
+    public static void setCuerpoCeleste() {
+        //Recoger datos del form
         try {
-            ObjectInputStream readingFile = new ObjectInputStream(new FileInputStream(urlFile));
-            System.out.println("El archivo de datos " + urlFile + " ha sido cargado");
-
-            //Recuperar datos del archivo
-            ArrayList<CuerpoCeleste> cuerposCelestesRecuperados = new ArrayList<>();
-            cuerposCelestesRecuperados = (ArrayList<CuerpoCeleste>) readingFile.readObject();
-
-            //Actualizar el array con los datos traidos del archivo
-            System.out.println("Datos en el sistema encontrados:");
-            cuerposCelestes.clear();
-            for (CuerpoCeleste c : cuerposCelestesRecuperados) {
-                cuerposCelestes.add(c);
-                System.out.println(c.toString());
-            }
-            readingFile.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No hay datos sobre el sistema solar almacenados.");
-        } catch (Exception e) {
-            throw new AssertionError(e.getMessage());
-        }
-    }
-
-    /**
-     * Sobreescribe el archivo indicado con la informacion enviada
-     *
-     * @param urlFile Archivo que se va a sobreescribir
-     * @param obj Información que se va a almacenar en el archivo
-     */
-    private static void writeFileData(String urlFile, Object obj) {
-        try {
-            ObjectOutputStream writingFile = new ObjectOutputStream(new FileOutputStream(urlFile));
-            writingFile.writeObject(obj);
-            writingFile.close();
-            runMenu();
-
-        } catch (FileNotFoundException e) {
-            throw new AssertionError(e.getMessage());
-        } catch (Exception e) {
-            throw new AssertionError(e.getMessage());
-        }
-    }
-
-    /**
-     * Ejecuta el menú completo.
-     */
-    public static void runMenu() {
-        showMenu();
-        selectMenuOption();
-    }
-
-    /**
-     * Muestra las distintas opciones del menú.
-     */
-    public static void showMenu() {
-        System.out.println("Seleccione una de las siguientes opciones:");
-        System.out.println("1. Añadir cuerpo celeste");
-        System.out.println("2. Listar cuerpos celestes");
-        System.out.println("3. Buscar cuerpo celeste por código");
-        System.out.println("4. Buscar cuerpo celeste por tipo");
-        System.out.println("5. Borrar cuerpo celeste");
-        System.out.println("6. Borrar fichero de cuerpos celestes");
-        System.out.println("7. Salir de la aplicación");
-    }
-
-    /**
-     * Funcionalidad del menú. Recoge una opción introducida por el usuario y en
-     * función de ello ejecuta el método correspondiente
-     */
-    public static void selectMenuOption() {
-        Scanner sc = new Scanner(System.in);
-        int option = sc.nextInt();
-
-        switch (option) {
-            case 1 ->
-                runAddCuerpoCeleste();
-            case 2 ->
-                showAllCuerposCelestes();
-            case 3 ->
-                runSearchCuerpoCelesteBy("code");
-            case 4 ->
-                runSearchCuerpoCelesteBy("type");
-            case 5 -> {
-                runDeleteCuerpoCelesteByCode();
-            }
-            case 6 ->
-                deleteFile(FILE_URL_SS);
-            case 7 ->
-                Exit();
-            default -> {
-                System.out.println("ERROR: Opcion incorrecta.");
-                runMenu();
-            }
-        }
-    }
-
-    private static void runAddCuerpoCeleste() {
-        collectDataCuerpoCeleste();
-    }
-
-    /**
-     * Añade un cuerpo celeste
-     */
-    private static void collectDataCuerpoCeleste() {
-        try {
-
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println("Introduzca los datos del cuerpo celeste");
-
-            System.out.println("Código (max: 3 dígitos, sin decimales)");
-            short code = sc.nextShort();
-
-            System.out.println("Nombre (max: 15)");
-            sc.nextLine();
-            String name = sc.nextLine();
-
-            System.out.println("Tipo");
-            System.out.println("1. " + CC_TIPO_1);
-            System.out.println("2. " + CC_TIPO_2);
-            System.out.println("3. " + CC_TIPO_3);
-            int type = sc.nextInt();
-
-            String strType;
-            switch (type) {
-                case 1 ->
-                    strType = CC_TIPO_1;
-                case 2 ->
-                    strType = CC_TIPO_2;
-                case 3 ->
-                    strType = CC_TIPO_3;
-                default ->
-                    throw new AssertionError();
-            }
-
-            System.out.println("Diametro (max: 6 digitos");
-            int diameter = sc.nextInt();
-            CuerpoCeleste miCuerpoCeleste = new CuerpoCeleste(code, name, strType, diameter);
-
-            cuerposCelestes.add(miCuerpoCeleste);
-            writeFileData(FILE_URL_SS, cuerposCelestes);
-            runMenu();
-
+            short code = Short.parseShort(jTextFieldCodeAdd.getText());
+            String name = jTextFieldNameAdd.getText();
+            int diameter = Integer.parseInt(jTextFieldDiameterAdd.getText());
+            String strType = jComboBoxTypeAdd.getSelectedItem().toString();
+            _createCuerpoCeleste(code, name, diameter, strType);
         } catch (InputMismatchException e) {
-            System.out.println("ERROR: Formato incorrecto (" + e + ")");
-            runMenu();
+            //TODO: Añadir codigo para mostrar errores
         } catch (Exception e) {
-            System.out.println("ERROR: " + e);
-            runMenu();
+            //TODO: Añadir codigo para mostrar errores
+        }
+    }
+
+    public static void deleteAll() {
+            _deleteAll(FILE_URL_SS);
+    }   
+    public static void deleteByCode(Short code){
+        _deleteByCode(code, FILE_URL_SS);
+    }
+    
+    public static void showAllCuerposCelestes() {
+        _addDataTojTableCuerposCelestes();
+    }
+
+    public static void searchCuerpoCelesteByCode() {
+        try {
+            short code = Short.parseShort(jTextFieldSearchCode.getText());
+            _searchCuerpoCelesteByCode(code);
+        } catch (InputMismatchException e) {
+            //TODO: Añadir codigo para mostrar errores
+        } catch (Exception e) {
+            //TODO: Añadir codigo para mostrar errores
+        }
+    }
+
+    public static void searchCuerpoCelesteByType() {
+        try {
+            String type = jTextFieldSearchType.getText();
+            _searchCuerpoCelesteByType(type);
+        } catch (InputMismatchException e) {
+            //TODO: Añadir codigo para mostrar errores
+        } catch (Exception e) {
+            //TODO: Añadir codigo para mostrar errores
+        }
+    }
+
+    public static void exit() {
+        _exit();
+    }
+
+    //Metodos privados
+    //Los metodos privados son _nombreDelMetodoPrivado().
+    private static void _createCuerpoCeleste(short code, String name, int diameter, String strType) {
+        try {
+            //Crear cuerpo celeste
+            CuerpoCeleste miCuerpoCeleste = new CuerpoCeleste(code, name, strType, diameter);
+            cuerposCelestes.add(miCuerpoCeleste);
+            //Añadir cuerpo celeste al archivo
+            writeFileData(FILE_URL_SS, cuerposCelestes);
+        } catch (InputMismatchException e) {
+            //TODO: Añadir codigo para mostrar errores
+//            System.out.println("ERROR: Formato incorrecto (" + e + ")");
+
+        } catch (Exception e) {
+            //TODO: Añadir codigo para mostrar errores
+
+//            System.out.println("ERROR: " + e);
             //throw new AssertionError(e);
         }
     }
 
-    /**
-     * Muestra todos los cuerpos celestes
-     */
-    private static void showAllCuerposCelestes() {
+    private static void _addDataTojTableCuerposCelestes() {
+        getFileData(FILE_URL_SS);
+        //jTableCuerposCelestes
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Código");
+        model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Diámetro");
+
+        //rellenarArchivoDatosPorDefecto();
         if (!cuerposCelestes.isEmpty()) {
             for (CuerpoCeleste c : cuerposCelestes) {
+                System.out.println("_addDataTojTableCuerposCelestes");
                 System.out.println(c.toString());
+                model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
-        } else {
-            System.out.println(CUERPOS_CELESTES_NOT_FOUND);
-        }
-        runMenu();
-    }
-
-    private static void runSearchCuerpoCelesteBy(String n) throws NumberFormatException {
-        Scanner sc = new Scanner(System.in);
-        switch (n) {
-            case "code" -> {
-                try {
-                    System.out.println("Introducir codigo para buscar planeta");
-                    short code = sc.nextShort();
-                    searchCuerpoCelesteByCode(code);
-                } catch (InputMismatchException e) {
-                    System.out.println("ERROR: Formato incorrecto (" + e + ")");
-                    runMenu();
-                } catch (Exception e) {
-                    System.out.println("ERROR: " + e);
-                    runMenu();
-                    //throw new AssertionError(e);
-                }
-            }
-
-            case "type" -> {
-                try {
-                    System.out.println("Introducir tipo para buscar planeta");
-                    System.out.println("1. " + CC_TIPO_1);
-                    System.out.println("2. " + CC_TIPO_2);
-                    System.out.println("3. " + CC_TIPO_3);
-                    int type = sc.nextInt();
-
-                    String strType;
-                    switch (type) {
-                        case 1 ->
-                            strType = CC_TIPO_1;
-                        case 2 ->
-                            strType = CC_TIPO_2;
-                        case 3 ->
-                            strType = CC_TIPO_3;
-                        default ->
-                            throw new AssertionError();
-                    }
-                    searchCuerpoCelesteByType(strType);
-                } catch (InputMismatchException e) {
-                    System.out.println("ERROR: Formato incorrecto (" + e + ")");
-                    runMenu();
-                } catch (Exception e) {
-                    System.out.println("ERROR: " + e);
-                    runMenu();
-                    //throw new AssertionError(e);
-                }
-            }
-
-            default ->
-                throw new AssertionError();
         }
 
+        jTableCuerposCelestes.setModel(model);
     }
 
-    /**
-     * Busca un cuerpo celeste por código
-     *
-     * @param ccCode Código del cuerpo celeste
-     */
-    private static void searchCuerpoCelesteByCode(short ccCode) {
+    private static void _searchCuerpoCelesteByCode(short ccCode) {
+        ArrayList<CuerpoCeleste> ccFinded = new ArrayList<>();
+
         int count = 0;
+        System.out.println("_searchCuerpoCelesteByCode");
         System.out.println("Buscando cuerpos celestes con el código " + ccCode);
         for (CuerpoCeleste c : cuerposCelestes) {
             if (c.getCodigoCuerpo() == ccCode) {
-                System.out.println(c.toString());
+                ccFinded.add(c);
                 count++;
             }
-
         }
-        if (count == 0) {
-            System.out.println(CUERPOS_CELESTES_NOT_FOUND);
+        if (count != 0) {
+            _addDataTojTableSearchByCode(ccFinded);
         }
-        runMenu();
     }
 
-    /**
-     * Busca un cuerpo celeste por tipo
-     *
-     * @param ccType
-     */
-    private static void searchCuerpoCelesteByType(String ccType) {
-        if (cuerposCelestes.isEmpty()) {
-            System.out.println(CUERPOS_CELESTES_NOT_FOUND);
-        } else {
-            System.out.println("Buscando cuerpos celestes del tipo " + ccType);
-            for (CuerpoCeleste c : cuerposCelestes) {
-                if (c.getTipoObjeto().toUpperCase().trim().equals(ccType.toUpperCase().trim())) {
-                    System.out.println(c.toString());
-                }
+    private static void _addDataTojTableSearchByCode(ArrayList<CuerpoCeleste> cc) {
+        //Crear modelo y cabecera
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Código");
+        model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Diámetro");
+
+        System.out.println("_addDataTojTableSearchByCode");
+
+        if (!cc.isEmpty()) {
+            for (CuerpoCeleste c : cc) {
+                System.out.println(c.toString());
+                model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
         }
 
-        runMenu();
+        jTableSearchByCode.setModel(model);
     }
 
-    private static void runDeleteCuerpoCelesteByCode() {
-        if (cuerposCelestes.isEmpty()) {
-            System.out.println(CUERPOS_CELESTES_NOT_FOUND);
-            runMenu();
-        } else {
-            try {
-                System.out.println("Introduce el código del cuerpo celeste que deseas borrar");
-                Scanner sc = new Scanner(System.in);
-                short code = sc.nextShort();
-                deleteCuerpoCelesteByCode(code);
-            } catch (InputMismatchException e) {
-                System.out.println("ERROR: Formato incorrecto (" + e + ")");
-                runMenu();
-            } catch (Exception e) {
-                System.out.println("ERROR: " + e);
-                runMenu();
-                //throw new AssertionError(e);
+    private static void _searchCuerpoCelesteByType(String ccType) {
+
+        ArrayList<CuerpoCeleste> ccFinded = new ArrayList<>();
+
+        int count = 0;
+        System.out.println("_searchCuerpoCelesteByType");
+        System.out.println("Buscando cuerpos celestes del tipo " + ccType);
+        for (CuerpoCeleste c : cuerposCelestes) {
+            if (c.getTipoObjeto().equals(ccType)) {
+                ccFinded.add(c);
+                count++;
             }
         }
+        if (count != 0) {
+            _addDataTojTableSearchByType(ccFinded);
+        }
     }
 
-    /**
-     * Pide un codigo de un cuerpo celeste y lo borra
-     *
-     * @param ccCode Código del cuerpo celeste
-     */
-    private static void deleteCuerpoCelesteByCode(short ccCode) {
-        if (cuerposCelestes.isEmpty()) {
-            System.out.println(CUERPOS_CELESTES_NOT_FOUND);
-            runMenu();
-        } else {
-            int count = 0;
-            System.out.println("Buscando cuerpos celestes con el código " + ccCode);
+    private static void _addDataTojTableSearchByType(ArrayList<CuerpoCeleste> cc) {
+        //Crear modelo y cabecera
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Código");
+        model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Diámetro");
 
-            for (CuerpoCeleste c : cuerposCelestes) {
-                if (c.getCodigoCuerpo() == ccCode) {
-                    Boolean delete = confirmDeleteCuerpoCeleste(c.toString());
-                    if (delete) {
-                        System.out.println(c.toString());
-                        cuerposCelestes.remove(c);
-                        count++;
-                    }
-                }
-                System.out.println(count + " elementos eliminados.");
-                writeFileData(FILE_URL_SS, cuerposCelestes);
+        System.out.println("_addDataTojTableSearchByCode");
+
+        if (!cc.isEmpty()) {
+            for (CuerpoCeleste c : cc) {
+                System.out.println(c.toString());
+                model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
         }
+        jTableSearchByType.setModel(model);
     }
 
-    private static Boolean confirmDeleteCuerpoCeleste(String name) {
-        System.out.println("¿Estas seguro que deseas borrar la siguiente entrada?");
-        System.out.println(name);
-        System.out.println("Pulsa 1 (uno) para borrar");
-        Boolean delete = false;
-        try {
-            Scanner sc = new Scanner(System.in);
-            String op;
-            op = sc.nextLine();
-            if ("1".equals(op)) {
-                delete = true;
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e);
-            runMenu();
-            //throw new AssertionError(e);
-        }
-        return delete;
+    private static void _deleteAll(String pathName){
+        deleteFile(pathName);
     }
-
-    /**
-     * Elimina del disco el archivo de la ruta indicada
-     *
-     * @param pathName url del archivo
-     */
-    private static void deleteFile(String pathName) {
-        File file = new File(pathName);
-        if (!file.exists()) {
-            System.out.println("No hay ningun fichero de datos.");
-        } else {
-            Boolean delete = confirmDeleteFile(pathName);
-            if (delete) {
-                try {
-                    //File file = new File(pathName);
-                    file.delete();
-                    cuerposCelestes.clear();
-                    System.out.println("¡Datos borrados!");
-                } catch (Exception e) {
-                    System.out.println("ERROR: " + e);
-                    runMenu();
-                    //throw new AssertionError(e);
-                }
-            }
-        }
-
-        runMenu();
+    private static void _deleteByCode(Short code, String pathName){
+        deleteCuerpoCelesteByCode(code, pathName);
     }
-
-    private static Boolean confirmDeleteFile(String pathName) {
-        System.out.println("¿Estas seguro que deseas borrar el archivo" + pathName + "?");
-        System.out.println("Pulsa 1 (uno) para borrar.");
-        Boolean delete = false;
-        try {
-            Scanner sc = new Scanner(System.in);
-            String op;
-            op = sc.nextLine();
-            if ("1".equals(op)) {
-                delete = true;
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e);
-            runMenu();
-        }
-        return delete;
-    }
-
-    /**
-     * Crea el un archivo en la ruta indicada
-     *
-     * @param url
-     */
-    private static void createFile(String url) {
-        try {
-            File file = new File(url);
-            file.createNewFile();
-        } catch (IOException e) {
-            System.out.println("ERROR: No se ha podido crear el archivo.");
-            System.out.println(e);
-            runMenu();
-            //throw new AssertionError(e);
-        } catch (Exception e) {
-            System.out.println("ERROR: No se ha podido crear el archivo.");
-            System.out.println(e);
-            runMenu();
-            //throw new AssertionError(e);
-        }
-    }
-
-    /**
-     * Finaliza el programa
-     */
-    private static void Exit() {
+    
+    private static void _exit() {
         System.out.println("Fin del programa. Hasta pronto!");
         System.exit(0);
     }
+
+    //TODO: BORRAR METODO CUANDO TODO FUNCIONE BIEN
+//    public static void rellenarArchivoDatosPorDefecto() {
+//        CuerpoCeleste c1 = new CuerpoCeleste((short) 111, "Planeta 1", "Luna", 5000);
+//        CuerpoCeleste c2 = new CuerpoCeleste((short) 222, "Planeta 2", "Planeta enano", 7000);
+//        CuerpoCeleste c3 = new CuerpoCeleste((short) 333, "Planeta 3", "Planeta", 4000);
+//        CuerpoCeleste c4 = new CuerpoCeleste((short) 444, "Planeta 4", "Planeta", 1000);
+//        CuerpoCeleste c5 = new CuerpoCeleste((short) 555, "Planeta 5", "Luna", 500);
+//        CuerpoCeleste c6 = new CuerpoCeleste((short) 666, "Planeta 6", "Luna", 2000);
+//        CuerpoCeleste c7 = new CuerpoCeleste((short) 777, "Planeta 2", "Planeta enano", 7000);
+//        CuerpoCeleste c8 = new CuerpoCeleste((short) 888, "Planeta 3", "Planeta", 4000);
+//        CuerpoCeleste c9 = new CuerpoCeleste((short) 999, "Planeta 4", "Planeta", 1000);
+//        CuerpoCeleste c10 = new CuerpoCeleste((short) 100, "Planeta 5", "Luna", 500);
+//        CuerpoCeleste c11 = new CuerpoCeleste((short) 110, "Planeta 6", "Luna", 2000);
+//        CuerpoCeleste c12 = new CuerpoCeleste((short) 120, "Planeta 2", "Planeta enano", 7000);
+//        CuerpoCeleste c13 = new CuerpoCeleste((short) 130, "Planeta 3", "Planeta", 4000);
+//        CuerpoCeleste c14 = new CuerpoCeleste((short) 140, "Planeta 4", "Planeta", 1000);
+//        CuerpoCeleste c15 = new CuerpoCeleste((short) 150, "Planeta 5", "Luna", 500);
+//
+//        cuerposCelestes.clear();
+//
+//        cuerposCelestes.add(c1);
+//        cuerposCelestes.add(c2);
+//        cuerposCelestes.add(c3);
+//        cuerposCelestes.add(c4);
+//        cuerposCelestes.add(c5);
+//        cuerposCelestes.add(c6);
+//        cuerposCelestes.add(c7);
+//        cuerposCelestes.add(c8);
+//        cuerposCelestes.add(c9);
+//        cuerposCelestes.add(c10);
+//        cuerposCelestes.add(c11);
+//        cuerposCelestes.add(c12);
+//        cuerposCelestes.add(c13);
+//        cuerposCelestes.add(c14);
+//        cuerposCelestes.add(c15);
+//        System.out.println("cuerposCelestes relleno");
+//        for (int i = 0; i < cuerposCelestes.size(); i++) {
+//            _writeFileData(FILE_URL_SS, i);
+//        }
+    //}
 }

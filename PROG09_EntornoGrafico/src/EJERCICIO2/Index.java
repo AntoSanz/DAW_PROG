@@ -5,12 +5,15 @@
 package EJERCICIO2;
 
 import EJERCICIO2.entornografico.EntornoGrafico;
+import static EJERCICIO2.funcionalidad.FuncionalidadArchivos.*;
 
 /**
  *
  * @author ANTO
  */
 public class Index {
+    static final String FILE_URL_SS = "./src/EJERCICIO2/data/sistemasolar.dat";
+
       public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -39,6 +42,7 @@ public class Index {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                createFile(FILE_URL_SS);
                 new EntornoGrafico().setVisible(true);
             }
         });

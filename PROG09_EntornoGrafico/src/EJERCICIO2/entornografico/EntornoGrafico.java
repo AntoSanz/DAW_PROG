@@ -4,7 +4,8 @@
  */
 package EJERCICIO2.entornografico;
 
-import static EJERCICIO2.funcionalidad.Func.*;
+import static EJERCICIO2.funcionalidad.Funcionalidad.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +54,20 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jDialogShowAllData = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCuerposCelestes = new javax.swing.JTable();
+        jDialogSearchByCode = new javax.swing.JDialog();
+        jTextFieldSearchCode = new javax.swing.JTextField();
+        jLabelSearchType = new javax.swing.JLabel();
+        jLabelSearchCodeTitle = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableSearchByCode = new javax.swing.JTable();
+        jButtonSearchByCode = new javax.swing.JButton();
+        jDialogSearchByType = new javax.swing.JDialog();
+        jTextFieldSearchType = new javax.swing.JTextField();
+        jLabelSearchCode1 = new javax.swing.JLabel();
+        jLabelSearchTypeTitle = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableSearchByType = new javax.swing.JTable();
+        jButtonSearchByType = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnShow = new javax.swing.JButton();
@@ -62,11 +77,11 @@ public class EntornoGrafico extends javax.swing.JFrame {
         btnDeleteOne = new javax.swing.JButton();
         btnDeleteAll = new javax.swing.JButton();
 
-        jDialogAdd.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDialogAdd.setTitle("Añadir cuerpo celeste");
         jDialogAdd.setMinimumSize(null);
+        jDialogAdd.setModal(true);
         jDialogAdd.setResizable(false);
-        jDialogAdd.setSize(new java.awt.Dimension(425, 300));
+        jDialogAdd.setSize(450,400);
 
         jLabelTitleAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelTitleAdd.setForeground(new java.awt.Color(0, 102, 255));
@@ -191,6 +206,9 @@ public class EntornoGrafico extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        jDialogShowAllData.setModal(true);
+        jDialogShowAllData.setSize(450,400);
+
         jTableCuerposCelestes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -228,6 +246,138 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jDialogShowAllDataLayout.setVerticalGroup(
             jDialogShowAllDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+
+        jDialogSearchByCode.setModal(true);
+        jDialogSearchByCode.setSize(450,400);
+
+        jTextFieldSearchCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSearchCodeActionPerformed(evt);
+            }
+        });
+
+        jLabelSearchType.setText("Código");
+
+        jLabelSearchCodeTitle.setText("Buscador de cuerpos celestes por código");
+
+        jTableSearchByCode.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Nombre", "Tipo", "Diámetro"
+            }
+        ));
+        jTableSearchByCode.setEnabled(false);
+        jTableSearchByCode.setFocusable(false);
+        jScrollPane2.setViewportView(jTableSearchByCode);
+
+        jButtonSearchByCode.setLabel("Buscar");
+        jButtonSearchByCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchByCodeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogSearchByCodeLayout = new javax.swing.GroupLayout(jDialogSearchByCode.getContentPane());
+        jDialogSearchByCode.getContentPane().setLayout(jDialogSearchByCodeLayout);
+        jDialogSearchByCodeLayout.setHorizontalGroup(
+            jDialogSearchByCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSearchByCodeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogSearchByCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogSearchByCodeLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchType)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldSearchCode, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSearchByCode))
+                    .addComponent(jLabelSearchCodeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        jDialogSearchByCodeLayout.setVerticalGroup(
+            jDialogSearchByCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSearchByCodeLayout.createSequentialGroup()
+                .addComponent(jLabelSearchCodeTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogSearchByCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchType)
+                    .addComponent(jTextFieldSearchCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSearchByCode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jDialogSearchByType.setModal(true);
+        jDialogSearchByType.setSize(450,400);
+
+        jTextFieldSearchType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSearchTypeActionPerformed(evt);
+            }
+        });
+
+        jLabelSearchCode1.setText("Tipo");
+
+        jLabelSearchTypeTitle.setText("Buscador de cuerpos celestes por tipo");
+
+        jTableSearchByType.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Nombre", "Tipo", "Diámetro"
+            }
+        ));
+        jTableSearchByType.setEnabled(false);
+        jTableSearchByType.setFocusable(false);
+        jScrollPane3.setViewportView(jTableSearchByType);
+
+        jButtonSearchByType.setLabel("Buscar");
+        jButtonSearchByType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchByTypeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogSearchByTypeLayout = new javax.swing.GroupLayout(jDialogSearchByType.getContentPane());
+        jDialogSearchByType.getContentPane().setLayout(jDialogSearchByTypeLayout);
+        jDialogSearchByTypeLayout.setHorizontalGroup(
+            jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSearchByTypeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogSearchByTypeLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchCode1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSearchByType))
+                    .addComponent(jLabelSearchTypeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        jDialogSearchByTypeLayout.setVerticalGroup(
+            jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogSearchByTypeLayout.createSequentialGroup()
+                .addComponent(jLabelSearchTypeTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSearchCode1)
+                    .addComponent(jTextFieldSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSearchByType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -395,12 +545,18 @@ public class EntornoGrafico extends javax.swing.JFrame {
 
     private void btnDeleteOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteOneActionPerformed
         System.out.println("Borrar por codigo");
+        String res = JOptionPane.showInputDialog(rootPane, "Indica el código del cuerpo celeste que desea borrar");
+        if (res != null) {
+            Short code = Short.parseShort(res);
+            deleteByCode(code);
+        }
+        
     }//GEN-LAST:event_btnDeleteOneActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         System.out.println("Click boton añadir");
         jDialogAdd.setVisible(true);
-        jDialogAdd.setSize(450, 300);
+        jDialogAdd.setSize(450, 400);
 
         jLabelDiameterError.setVisible(false);
         jLabelNameError.setVisible(false);
@@ -410,21 +566,36 @@ public class EntornoGrafico extends javax.swing.JFrame {
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         System.out.println("Click boton mostrar lista");
+        showAllCuerposCelestes();
         jDialogShowAllData.setVisible(true);
-        jDialogShowAllData.setSize(600, 300);
-        addDataTojTableCuerposCelestes();
+        jDialogShowAllData.setSize(450, 400);
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void btnSearchCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCodeActionPerformed
         System.out.println("Click buscar por codigo");
+        jDialogSearchByCode.setVisible(true);
+        jDialogSearchByCode.setSize(450, 400);
     }//GEN-LAST:event_btnSearchCodeActionPerformed
 
     private void btnSearchTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchTypeActionPerformed
         System.out.println("Click buscar por tipo");
+        jDialogSearchByType.setVisible(true);
+        jDialogSearchByType.setSize(450, 400);
     }//GEN-LAST:event_btnSearchTypeActionPerformed
 
     private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed
         System.out.println("Borrar todo");
+        int res = JOptionPane.showConfirmDialog(
+                rootPane,
+                "¿Desea realmente borrar el archivo de datos?",
+                "Borrado de datos",
+                JOptionPane.YES_NO_OPTION);
+        if (res == JOptionPane.YES_OPTION) {
+            System.out.println("YES");
+            deleteAll();
+        } else {
+            System.out.println("NO");
+        }
     }//GEN-LAST:event_btnDeleteAllActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -433,6 +604,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
 
     private void jButtonAceptAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptAddActionPerformed
         setCuerpoCeleste();
+        jDialogAdd.setVisible(false);
+
     }//GEN-LAST:event_jButtonAceptAddActionPerformed
 
     private void jButtonCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelAddActionPerformed
@@ -443,9 +616,23 @@ public class EntornoGrafico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNameAddActionPerformed
 
-private void createTableModelCuerposCelestes(){
-    
-}
+    private void jTextFieldSearchCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSearchCodeActionPerformed
+
+    private void jButtonSearchByCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchByCodeActionPerformed
+        // TODO add your handling code here:
+        searchCuerpoCelesteByCode();
+    }//GEN-LAST:event_jButtonSearchByCodeActionPerformed
+
+    private void jTextFieldSearchTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSearchTypeActionPerformed
+
+    private void jButtonSearchByTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchByTypeActionPerformed
+        // TODO add your handling code here:
+        searchCuerpoCelesteByType();
+    }//GEN-LAST:event_jButtonSearchByTypeActionPerformed
 
 //    private static void createCuerpoCeleste() {
 //        try {
@@ -473,7 +660,6 @@ private void createTableModelCuerposCelestes(){
 //            //throw new AssertionError(e);
 //        }
 //    }
-
     private static void closeAndResetJDialogAdd() {
         jDialogAdd.setVisible(false);
         jTextFieldCodeAdd.setText("");
@@ -513,8 +699,12 @@ private void createTableModelCuerposCelestes(){
     private javax.swing.JButton btnShow;
     private javax.swing.JButton jButtonAceptAdd;
     private javax.swing.JButton jButtonCancelAdd;
+    public static javax.swing.JButton jButtonSearchByCode;
+    public static javax.swing.JButton jButtonSearchByType;
     public static javax.swing.JComboBox<String> jComboBoxTypeAdd;
     private static javax.swing.JDialog jDialogAdd;
+    private javax.swing.JDialog jDialogSearchByCode;
+    private javax.swing.JDialog jDialogSearchByType;
     private javax.swing.JDialog jDialogShowAllData;
     private javax.swing.JLabel jLabelCodeAdd;
     private javax.swing.JLabel jLabelCodeError;
@@ -522,14 +712,24 @@ private void createTableModelCuerposCelestes(){
     private javax.swing.JLabel jLabelDiameterError;
     private javax.swing.JLabel jLabelNameAdd;
     private javax.swing.JLabel jLabelNameError;
+    private javax.swing.JLabel jLabelSearchCode1;
+    private javax.swing.JLabel jLabelSearchCodeTitle;
+    private javax.swing.JLabel jLabelSearchType;
+    private javax.swing.JLabel jLabelSearchTypeTitle;
     private javax.swing.JLabel jLabelTitleAdd;
     private javax.swing.JLabel jLabelTypeAdd;
     private javax.swing.JLabel jLabelTypeError;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTableCuerposCelestes;
+    public static javax.swing.JTable jTableSearchByCode;
+    public static javax.swing.JTable jTableSearchByType;
     public static javax.swing.JTextField jTextFieldCodeAdd;
     public static javax.swing.JTextField jTextFieldDiameterAdd;
     public static javax.swing.JTextField jTextFieldNameAdd;
+    public static javax.swing.JTextField jTextFieldSearchCode;
+    public static javax.swing.JTextField jTextFieldSearchType;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

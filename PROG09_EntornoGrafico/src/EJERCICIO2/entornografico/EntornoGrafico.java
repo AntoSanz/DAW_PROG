@@ -48,9 +48,7 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jButtonCancelAdd = new javax.swing.JButton();
         jButtonAceptAdd = new javax.swing.JButton();
         jLabelCodeError = new javax.swing.JLabel();
-        jLabelNameError = new javax.swing.JLabel();
         jLabelDiameterError = new javax.swing.JLabel();
-        jLabelTypeError = new javax.swing.JLabel();
         jDialogShowAllData = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCuerposCelestes = new javax.swing.JTable();
@@ -62,12 +60,12 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jTableSearchByCode = new javax.swing.JTable();
         jButtonSearchByCode = new javax.swing.JButton();
         jDialogSearchByType = new javax.swing.JDialog();
-        jTextFieldSearchType = new javax.swing.JTextField();
         jLabelSearchCode1 = new javax.swing.JLabel();
         jLabelSearchTypeTitle = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableSearchByType = new javax.swing.JTable();
         jButtonSearchByType = new javax.swing.JButton();
+        jComboBoxSearchByType = new javax.swing.JComboBox<>();
         mainPanel = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnShow = new javax.swing.JButton();
@@ -101,6 +99,11 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jTextFieldCodeAdd.setColumns(3);
         jTextFieldCodeAdd.setToolTipText("");
         jTextFieldCodeAdd.setMaximumSize(null);
+        jTextFieldCodeAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCodeAddKeyTyped(evt);
+            }
+        });
 
         jTextFieldNameAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +112,17 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         jComboBoxTypeAdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Planeta", "Planeta enano", "Luna" }));
+
+        jTextFieldDiameterAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDiameterAddActionPerformed(evt);
+            }
+        });
+        jTextFieldDiameterAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldDiameterAddKeyTyped(evt);
+            }
+        });
 
         jButtonCancelAdd.setText("Cancelar");
         jButtonCancelAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -124,21 +138,13 @@ public class EntornoGrafico extends javax.swing.JFrame {
             }
         });
 
-        jLabelCodeError.setForeground(new java.awt.Color(255, 0, 51));
-        jLabelCodeError.setText("El formato del código es incorrecto (3 números)");
+        jLabelCodeError.setText("El código deben ser 3 números");
+        jLabelCodeError.setEnabled(false);
         jLabelCodeError.setFocusable(false);
 
-        jLabelNameError.setForeground(new java.awt.Color(255, 0, 51));
-        jLabelNameError.setText("El formato es incorrecto");
-        jLabelNameError.setFocusable(false);
-
-        jLabelDiameterError.setForeground(new java.awt.Color(255, 0, 51));
-        jLabelDiameterError.setText("El formato del diámetro es incorrecto (Solo números)");
+        jLabelDiameterError.setText("El diámetro debe ser un úmero positivo de 6 o menos dígitos");
+        jLabelDiameterError.setEnabled(false);
         jLabelDiameterError.setFocusable(false);
-
-        jLabelTypeError.setForeground(new java.awt.Color(255, 0, 51));
-        jLabelTypeError.setText("El formato es incorrecto");
-        jLabelTypeError.setFocusable(false);
 
         javax.swing.GroupLayout jDialogAddLayout = new javax.swing.GroupLayout(jDialogAdd.getContentPane());
         jDialogAdd.getContentPane().setLayout(jDialogAddLayout);
@@ -157,17 +163,15 @@ public class EntornoGrafico extends javax.swing.JFrame {
                             .addComponent(jLabelCodeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelNameAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelTypeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelDiameterAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                            .addComponent(jLabelDiameterAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDiameterError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(jLabelTypeError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelNameError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelCodeError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelDiameterError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextFieldNameAdd)
                             .addComponent(jComboBoxTypeAdd, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextFieldDiameterAdd, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldCodeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jTextFieldCodeAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelCodeError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jDialogAddLayout.setVerticalGroup(
@@ -181,19 +185,15 @@ public class EntornoGrafico extends javax.swing.JFrame {
                     .addComponent(jTextFieldCodeAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelCodeError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNameAdd)
                     .addComponent(jTextFieldNameAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelNameError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(jDialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTypeAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTypeAdd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelTypeError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(jDialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldDiameterAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDiameterAdd))
@@ -203,7 +203,7 @@ public class EntornoGrafico extends javax.swing.JFrame {
                 .addGroup(jDialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAceptAdd)
                     .addComponent(jButtonCancelAdd))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jDialogShowAllData.setModal(true);
@@ -256,9 +256,17 @@ public class EntornoGrafico extends javax.swing.JFrame {
                 jTextFieldSearchCodeActionPerformed(evt);
             }
         });
+        jTextFieldSearchCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchCodeKeyTyped(evt);
+            }
+        });
 
         jLabelSearchType.setText("Código");
 
+        jLabelSearchCodeTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelSearchCodeTitle.setForeground(new java.awt.Color(0, 102, 255));
+        jLabelSearchCodeTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSearchCodeTitle.setText("Buscador de cuerpos celestes por código");
 
         jTableSearchByCode.setModel(new javax.swing.table.DefaultTableModel(
@@ -317,14 +325,11 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jDialogSearchByType.setModal(true);
         jDialogSearchByType.setSize(450,400);
 
-        jTextFieldSearchType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSearchTypeActionPerformed(evt);
-            }
-        });
-
         jLabelSearchCode1.setText("Tipo");
 
+        jLabelSearchTypeTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabelSearchTypeTitle.setForeground(new java.awt.Color(0, 102, 255));
+        jLabelSearchTypeTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelSearchTypeTitle.setText("Buscador de cuerpos celestes por tipo");
 
         jTableSearchByType.setModel(new javax.swing.table.DefaultTableModel(
@@ -349,6 +354,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxSearchByType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Planeta", "Planeta enano", "Luna" }));
+
         javax.swing.GroupLayout jDialogSearchByTypeLayout = new javax.swing.GroupLayout(jDialogSearchByType.getContentPane());
         jDialogSearchByType.getContentPane().setLayout(jDialogSearchByTypeLayout);
         jDialogSearchByTypeLayout.setHorizontalGroup(
@@ -358,9 +365,9 @@ public class EntornoGrafico extends javax.swing.JFrame {
                 .addGroup(jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialogSearchByTypeLayout.createSequentialGroup()
                         .addComponent(jLabelSearchCode1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxSearchByType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonSearchByType))
                     .addComponent(jLabelSearchTypeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -373,14 +380,15 @@ public class EntornoGrafico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDialogSearchByTypeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSearchCode1)
-                    .addComponent(jTextFieldSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSearchByType))
+                    .addComponent(jButtonSearchByType)
+                    .addComponent(jComboBoxSearchByType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ADMINISTRADOR DE CUERPOS CELESTES");
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(153, 183, 255));
         setResizable(false);
@@ -390,7 +398,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         mainPanel.setFocusable(false);
 
         btnAdd.setBackground(new java.awt.Color(89, 168, 105));
-        btnAdd.setText("Añadir");
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAdd.setText("AÑADIR");
         btnAdd.setBorderPainted(false);
         btnAdd.setFocusPainted(false);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -400,7 +409,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnShow.setBackground(new java.awt.Color(56, 159, 214));
-        btnShow.setText("mostrar");
+        btnShow.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnShow.setText("MOSTRAR");
         btnShow.setBorderPainted(false);
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +419,9 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnSearchCode.setBackground(new java.awt.Color(237, 162, 0));
-        btnSearchCode.setText("Buscar pro codigo");
+        btnSearchCode.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSearchCode.setText("<html><p align='center'>BUSCAR</p><p align='center'>POR</p><p align='center'>CODIGO</p></html>");
+        btnSearchCode.setToolTipText("");
         btnSearchCode.setBorderPainted(false);
         btnSearchCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,7 +430,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnExit.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.borderColor"));
-        btnExit.setText("salir");
+        btnExit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnExit.setText("SALIR");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -426,7 +439,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnSearchType.setBackground(new java.awt.Color(237, 162, 0));
-        btnSearchType.setText("Buscar por tipo");
+        btnSearchType.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSearchType.setText("<html><p align='center'>BUSCAR</p><p align='center'>POR</p><p align='center'>TIPO</p></html>");
         btnSearchType.setBorderPainted(false);
         btnSearchType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,7 +449,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnDeleteOne.setBackground(new java.awt.Color(219, 88, 96));
-        btnDeleteOne.setText("borrar uno");
+        btnDeleteOne.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDeleteOne.setText("<html><p align='center'>BORRAR</p><p align='center'>POR</p><p align='center'>CODIGO</p></html>");
         btnDeleteOne.setBorderPainted(false);
         btnDeleteOne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,7 +459,8 @@ public class EntornoGrafico extends javax.swing.JFrame {
         });
 
         btnDeleteAll.setBackground(new java.awt.Color(219, 88, 96));
-        btnDeleteAll.setText("borrar todo");
+        btnDeleteAll.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDeleteAll.setText("BORRAR TODO");
         btnDeleteAll.setBorderPainted(false);
         btnDeleteAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,7 +483,7 @@ public class EntornoGrafico extends javax.swing.JFrame {
                     .addComponent(btnSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDeleteOne, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(btnDeleteOne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDeleteAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -550,18 +566,13 @@ public class EntornoGrafico extends javax.swing.JFrame {
             Short code = Short.parseShort(res);
             deleteByCode(code);
         }
-        
+
     }//GEN-LAST:event_btnDeleteOneActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         System.out.println("Click boton añadir");
         jDialogAdd.setVisible(true);
         jDialogAdd.setSize(450, 400);
-
-        jLabelDiameterError.setVisible(false);
-        jLabelNameError.setVisible(false);
-        jLabelCodeError.setVisible(false);
-        jLabelTypeError.setVisible(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
@@ -605,7 +616,6 @@ public class EntornoGrafico extends javax.swing.JFrame {
     private void jButtonAceptAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptAddActionPerformed
         setCuerpoCeleste();
         jDialogAdd.setVisible(false);
-
     }//GEN-LAST:event_jButtonAceptAddActionPerformed
 
     private void jButtonCancelAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelAddActionPerformed
@@ -613,53 +623,40 @@ public class EntornoGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelAddActionPerformed
 
     private void jTextFieldNameAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameAddActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNameAddActionPerformed
 
     private void jTextFieldSearchCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchCodeActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchCodeActionPerformed
 
     private void jButtonSearchByCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchByCodeActionPerformed
-        // TODO add your handling code here:
         searchCuerpoCelesteByCode();
     }//GEN-LAST:event_jButtonSearchByCodeActionPerformed
 
-    private void jTextFieldSearchTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldSearchTypeActionPerformed
-
     private void jButtonSearchByTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchByTypeActionPerformed
-        // TODO add your handling code here:
         searchCuerpoCelesteByType();
     }//GEN-LAST:event_jButtonSearchByTypeActionPerformed
 
-//    private static void createCuerpoCeleste() {
-//        try {
-//            //Recoger datos del form
-//            short code = Short.parseShort(jTextFieldCodeAdd.getText());
-//            String name = jTextFieldNameAdd.getText();
-//            int diameter = Integer.parseInt(jTextFieldDiameterAdd.getText());
-//            String strType = jComboBoxTypeAdd.getSelectedItem().toString();
-//            System.out.println("Datos recogidos");
-//
-//            //Crear cuerpo celeste
-//            CuerpoCeleste miCuerpoCeleste = new CuerpoCeleste(code, name, strType, diameter);
-//            cuerposCelestes.add(miCuerpoCeleste);
-//            writeFileData(FILE_URL_SS, cuerposCelestes);
-//
-//        } catch (InputMismatchException e) {
-//            //TODO: Añadir codigo para mostrar errores
-////            System.out.println("ERROR: Formato incorrecto (" + e + ")");
-////            runMenu();
-//        } catch (Exception e) {
-//            //TODO: Añadir codigo para mostrar errores
-//
-////            System.out.println("ERROR: " + e);
-////            runMenu();
-//            //throw new AssertionError(e);
-//        }
-//    }
+    private void jTextFieldCodeAddKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodeAddKeyTyped
+        if (jTextFieldCodeAdd.getText().length() >= 3) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldCodeAddKeyTyped
+
+    private void jTextFieldDiameterAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDiameterAddActionPerformed
+    }//GEN-LAST:event_jTextFieldDiameterAddActionPerformed
+
+    private void jTextFieldDiameterAddKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDiameterAddKeyTyped
+        if (jTextFieldDiameterAdd.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldDiameterAddKeyTyped
+
+    private void jTextFieldSearchCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchCodeKeyTyped
+        if (jTextFieldDiameterAdd.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldSearchCodeKeyTyped
+
     private static void closeAndResetJDialogAdd() {
         jDialogAdd.setVisible(false);
         jTextFieldCodeAdd.setText("");
@@ -668,26 +665,29 @@ public class EntornoGrafico extends javax.swing.JFrame {
         jComboBoxTypeAdd.setSelectedIndex(0);
     }
 
-//    private static void resetFields(Container container) {
-//        for (Component component : container.getComponents()) {
-//            if (component instanceof JTextField jTextField) {
-//                System.out.println(jTextField.getText());
-//            }
-//        }
-//    }
-//    private static void writeFileData(String urlFile, Object obj) {
-//        try {
-//            ObjectOutputStream writingFile = new ObjectOutputStream(new FileOutputStream(urlFile));
-//            writingFile.writeObject(obj);
-//            writingFile.close();
-//            runMenu();
-//
-//        } catch (FileNotFoundException e) {
-//            throw new AssertionError(e.getMessage());
-//        } catch (Exception e) {
-//            throw new AssertionError(e.getMessage());
-//        }
-//    }
+    public static void errorMessage(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+    //    private static void resetFields(Container container) {
+    //        for (Component component : container.getComponents()) {
+    //            if (component instanceof JTextField jTextField) {
+    //                System.out.println(jTextField.getText());
+    //            }
+    //        }
+    //    }
+    //    private static void writeFileData(String urlFile, Object obj) {
+    //        try {
+    //            ObjectOutputStream writingFile = new ObjectOutputStream(new FileOutputStream(urlFile));
+    //            writingFile.writeObject(obj);
+    //            writingFile.close();
+    //            runMenu();
+    //
+    //        } catch (FileNotFoundException e) {
+    //            throw new AssertionError(e.getMessage());
+    //        } catch (Exception e) {
+    //            throw new AssertionError(e.getMessage());
+    //        }
+    //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -701,6 +701,7 @@ public class EntornoGrafico extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelAdd;
     public static javax.swing.JButton jButtonSearchByCode;
     public static javax.swing.JButton jButtonSearchByType;
+    public static javax.swing.JComboBox<String> jComboBoxSearchByType;
     public static javax.swing.JComboBox<String> jComboBoxTypeAdd;
     private static javax.swing.JDialog jDialogAdd;
     private javax.swing.JDialog jDialogSearchByCode;
@@ -711,14 +712,12 @@ public class EntornoGrafico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDiameterAdd;
     private javax.swing.JLabel jLabelDiameterError;
     private javax.swing.JLabel jLabelNameAdd;
-    private javax.swing.JLabel jLabelNameError;
     private javax.swing.JLabel jLabelSearchCode1;
     private javax.swing.JLabel jLabelSearchCodeTitle;
     private javax.swing.JLabel jLabelSearchType;
     private javax.swing.JLabel jLabelSearchTypeTitle;
     private javax.swing.JLabel jLabelTitleAdd;
     private javax.swing.JLabel jLabelTypeAdd;
-    private javax.swing.JLabel jLabelTypeError;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -729,7 +728,6 @@ public class EntornoGrafico extends javax.swing.JFrame {
     public static javax.swing.JTextField jTextFieldDiameterAdd;
     public static javax.swing.JTextField jTextFieldNameAdd;
     public static javax.swing.JTextField jTextFieldSearchCode;
-    public static javax.swing.JTextField jTextFieldSearchType;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

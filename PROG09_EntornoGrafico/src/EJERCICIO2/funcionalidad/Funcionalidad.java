@@ -17,35 +17,43 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
 
-    static ArrayList<CuerpoCeleste> cuerposCelestes = new ArrayList<>();
-    static final String FILE_URL_SS = "./src/EJERCICIO2/data/sistemasolar.dat";
+    static public ArrayList<CuerpoCeleste> cuerposCelestes = new ArrayList<>();
+    static final String FILE_URL_SS = "./src/EJERCICIO2/funcionalidad/data/sistemasolar.dat";
 
     //Metodos publicos para acceder a la funcionalidad privada
     //Los metodos privados son nombreDelMetodoPublico().
     public static void setCuerpoCeleste() {
         //Recoger datos del form
         try {
+            
             short code = Short.parseShort(jTextFieldCodeAdd.getText());
             String name = jTextFieldNameAdd.getText();
             int diameter = Integer.parseInt(jTextFieldDiameterAdd.getText());
             String strType = jComboBoxTypeAdd.getSelectedItem().toString();
             _createCuerpoCeleste(code, name, diameter, strType);
         } catch (InputMismatchException e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: Formato incorrecto (" + e + ")");
+        } catch (IllegalStateException e) {
+            errorMessage("ERROR: Tipo de dato no admitido");
         } catch (Exception e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: Tipo de dato no admitido " + e.getMessage());
         }
     }
 
     public static void deleteAll() {
-            _deleteAll(FILE_URL_SS);
-    }   
-    public static void deleteByCode(Short code){
+        _deleteAll(FILE_URL_SS);
+    }
+
+    public static void deleteByCode(Short code) {
         _deleteByCode(code, FILE_URL_SS);
     }
-    
+
     public static void showAllCuerposCelestes() {
-        _addDataTojTableCuerposCelestes();
+        if (cuerposCelestes.size() == 0) {
+
+        } else {
+            _addDataTojTableCuerposCelestes();
+        }
     }
 
     public static void searchCuerpoCelesteByCode() {
@@ -53,20 +61,21 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
             short code = Short.parseShort(jTextFieldSearchCode.getText());
             _searchCuerpoCelesteByCode(code);
         } catch (InputMismatchException e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: " + e.getMessage());
         } catch (Exception e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: " + e.getMessage());
         }
     }
 
     public static void searchCuerpoCelesteByType() {
         try {
-            String type = jTextFieldSearchType.getText();
+            String type = jComboBoxSearchByType.getSelectedItem().toString();
             _searchCuerpoCelesteByType(type);
         } catch (InputMismatchException e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: " + e.getMessage());
+
         } catch (Exception e) {
-            //TODO: Añadir codigo para mostrar errores
+            errorMessage("ERROR: " + e.getMessage());
         }
     }
 
@@ -84,19 +93,14 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
             //Añadir cuerpo celeste al archivo
             writeFileData(FILE_URL_SS, cuerposCelestes);
         } catch (InputMismatchException e) {
-            //TODO: Añadir codigo para mostrar errores
-//            System.out.println("ERROR: Formato incorrecto (" + e + ")");
-
+            errorMessage("ERROR: Formato incorrecto (" + e + ")");
         } catch (Exception e) {
-            //TODO: Añadir codigo para mostrar errores
-
-//            System.out.println("ERROR: " + e);
-            //throw new AssertionError(e);
+            errorMessage("ERROR: " + e);
         }
     }
 
     private static void _addDataTojTableCuerposCelestes() {
-        getFileData(FILE_URL_SS);
+        getFileData();
         //jTableCuerposCelestes
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Código");
@@ -104,11 +108,10 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
         model.addColumn("Tipo");
         model.addColumn("Diámetro");
 
-        //rellenarArchivoDatosPorDefecto();
         if (!cuerposCelestes.isEmpty()) {
             for (CuerpoCeleste c : cuerposCelestes) {
-                System.out.println("_addDataTojTableCuerposCelestes");
-                System.out.println(c.toString());
+                //System.out.println("_addDataTojTableCuerposCelestes");
+                //System.out.println(c.toString());
                 model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
         }
@@ -120,8 +123,8 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
         ArrayList<CuerpoCeleste> ccFinded = new ArrayList<>();
 
         int count = 0;
-        System.out.println("_searchCuerpoCelesteByCode");
-        System.out.println("Buscando cuerpos celestes con el código " + ccCode);
+        //System.out.println("_searchCuerpoCelesteByCode");
+        //System.out.println("Buscando cuerpos celestes con el código " + ccCode);
         for (CuerpoCeleste c : cuerposCelestes) {
             if (c.getCodigoCuerpo() == ccCode) {
                 ccFinded.add(c);
@@ -141,11 +144,10 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
         model.addColumn("Tipo");
         model.addColumn("Diámetro");
 
-        System.out.println("_addDataTojTableSearchByCode");
-
+        //System.out.println("_addDataTojTableSearchByCode");
         if (!cc.isEmpty()) {
             for (CuerpoCeleste c : cc) {
-                System.out.println(c.toString());
+                //System.out.println(c.toString());
                 model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
         }
@@ -158,8 +160,8 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
         ArrayList<CuerpoCeleste> ccFinded = new ArrayList<>();
 
         int count = 0;
-        System.out.println("_searchCuerpoCelesteByType");
-        System.out.println("Buscando cuerpos celestes del tipo " + ccType);
+        //System.out.println("_searchCuerpoCelesteByType");
+        //System.out.println("Buscando cuerpos celestes del tipo " + ccType);
         for (CuerpoCeleste c : cuerposCelestes) {
             if (c.getTipoObjeto().equals(ccType)) {
                 ccFinded.add(c);
@@ -179,26 +181,26 @@ public class Funcionalidad extends EJERCICIO2.entornografico.EntornoGrafico {
         model.addColumn("Tipo");
         model.addColumn("Diámetro");
 
-        System.out.println("_addDataTojTableSearchByCode");
-
+        //System.out.println("_addDataTojTableSearchByCode");
         if (!cc.isEmpty()) {
             for (CuerpoCeleste c : cc) {
-                System.out.println(c.toString());
+                //System.out.println(c.toString());
                 model.addRow(new Object[]{c.getCodigoCuerpo(), c.getNombre(), c.getTipoObjeto(), c.getDiametro()});
             }
         }
         jTableSearchByType.setModel(model);
     }
 
-    private static void _deleteAll(String pathName){
+    private static void _deleteAll(String pathName) {
         deleteFile(pathName);
     }
-    private static void _deleteByCode(Short code, String pathName){
+
+    private static void _deleteByCode(Short code, String pathName) {
         deleteCuerpoCelesteByCode(code, pathName);
     }
-    
+
     private static void _exit() {
-        System.out.println("Fin del programa. Hasta pronto!");
+        //System.out.println("Fin del programa. Hasta pronto!");
         System.exit(0);
     }
 

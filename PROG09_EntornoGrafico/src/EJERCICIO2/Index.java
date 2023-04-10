@@ -5,6 +5,7 @@
 package EJERCICIO2;
 
 import EJERCICIO2.entornografico.EntornoGrafico;
+import EJERCICIO2.funcionalidad.Funcionalidad;
 import static EJERCICIO2.funcionalidad.FuncionalidadArchivos.*;
 
 /**
@@ -12,9 +13,9 @@ import static EJERCICIO2.funcionalidad.FuncionalidadArchivos.*;
  * @author ANTO
  */
 public class Index {
-    static final String FILE_URL_SS = "./src/EJERCICIO2/data/sistemasolar.dat";
+    //static final String FILE_URL_SS = "./data/sistemasolar.dat";
 
-      public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -42,7 +43,10 @@ public class Index {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                createFile(FILE_URL_SS);
+                getFileData();
+                if (Funcionalidad.cuerposCelestes.isEmpty()) {
+                    createFile();
+                }
                 new EntornoGrafico().setVisible(true);
             }
         });

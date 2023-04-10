@@ -4,6 +4,7 @@
  */
 package EJERCICIO2.funcionalidad;
 
+import static EJERCICIO2.entornografico.EntornoGrafico.errorMessage;
 import static EJERCICIO2.funcionalidad.Funcionalidad.cuerposCelestes;
 import EJERCICIO2.funcionalidad.modelos.CuerpoCeleste;
 import java.io.File;
@@ -14,19 +15,31 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ANTO
  */
 public class FuncionalidadArchivos {
+
+    static final String FILE_URL_SS = "./src/EJERCICIO2/funcionalidad/data/sistemasolar.dat";
+
     //Metodos publicos para acceder a los metodos privados desde fuera
     public static void writeFileData(String pathName, Object obj) {
         _writeFileData(pathName, obj);
     }
 
+    public static void getFileData() {
+        _getFileData(FILE_URL_SS);
+    }
+
     public static void getFileData(String pathName) {
         _getFileData(pathName);
+    }
+
+    public static void createFile() {
+        _createFile(FILE_URL_SS);
     }
 
     public static void createFile(String pathName) {
@@ -47,7 +60,7 @@ public class FuncionalidadArchivos {
             ObjectOutputStream writingFile = new ObjectOutputStream(new FileOutputStream(pathName));
             writingFile.writeObject(obj);
             writingFile.close();
-            System.out.println("Cuerpo celeste añadido");
+            //System.out.println("Cuerpo celeste añadido");
         } catch (FileNotFoundException e) {
             throw new AssertionError(e.getMessage());
         } catch (Exception e) {
@@ -58,18 +71,18 @@ public class FuncionalidadArchivos {
     private static void _getFileData(String pathName) {
         try {
             ObjectInputStream readingFile = new ObjectInputStream(new FileInputStream(pathName));
-            System.out.println("El archivo de datos " + pathName + " ha sido cargado");
+            //System.out.println("El archivo de datos " + pathName + " ha sido cargado");
 
             //Recuperar datos del archivo
             ArrayList<CuerpoCeleste> cuerposCelestesRecuperados = new ArrayList<>();
             cuerposCelestesRecuperados = (ArrayList<CuerpoCeleste>) readingFile.readObject();
 
             //Actualizar el array con los datos traidos del archivo
-            System.out.println("Datos en el sistema encontrados:");
+            //System.out.println("Datos en el sistema encontrados:");
             cuerposCelestes.clear();
             for (CuerpoCeleste c : cuerposCelestesRecuperados) {
                 cuerposCelestes.add(c);
-                System.out.println(c.toString());
+                //System.out.println(c.toString());
             }
             readingFile.close();
         } catch (FileNotFoundException e) {
@@ -83,7 +96,9 @@ public class FuncionalidadArchivos {
         try {
             File file = new File(pathName);
             file.createNewFile();
-            System.out.println("Archivo creado en " + pathName);
+            //System.out.println("Archivo creado en " + pathName);
+            _writeFileData(pathName, cuerposCelestes
+            );
         } catch (IOException e) {
             System.out.println("ERROR: No se ha podido crear el archivo.");
             System.out.println(e);
@@ -99,36 +114,38 @@ public class FuncionalidadArchivos {
         File file = new File(pathName);
         if (!file.exists()) {
             System.out.println("No hay ningun fichero de datos.");
+            errorMessage("No hay ningun fichero de datos.");
         } else {
             try {
                 //File file = new File(pathName);
                 file.delete();
                 cuerposCelestes.clear();
                 System.out.println("¡Datos borrados!");
+                errorMessage("¡Datos borrados!");
             } catch (Exception e) {
                 System.out.println("ERROR: " + e);
+                errorMessage("ERROR: " + e);
+
                 //throw new AssertionError(e);
             }
-
         }
-
     }
 
     private static void _deleteCuerpoCelesteByCode(short ccCode, String pathName) {
         if (!cuerposCelestes.isEmpty()) {
             int count = 0;
-            System.out.println("Buscando cuerpos celestes con el código " + ccCode);
+            //System.out.println("Buscando cuerpos celestes con el código " + ccCode);
 
             for (CuerpoCeleste c : cuerposCelestes) {
                 if (c.getCodigoCuerpo() == ccCode) {
 
-                    System.out.println(c.toString());
+                    //System.out.println(c.toString());
                     cuerposCelestes.remove(c);
                     count++;
 
                 }
                 System.out.println(count + " elementos eliminados.");
-                writeFileData(pathName, cuerposCelestes);
+                _writeFileData(pathName, cuerposCelestes);
             }
         }
     }

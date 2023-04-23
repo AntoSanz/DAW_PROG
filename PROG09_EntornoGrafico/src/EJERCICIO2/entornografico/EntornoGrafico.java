@@ -668,26 +668,6 @@ public class EntornoGrafico extends javax.swing.JFrame {
     public static void errorMessage(String msg) {
         JOptionPane.showMessageDialog(null, msg);
     }
-    //    private static void resetFields(Container container) {
-    //        for (Component component : container.getComponents()) {
-    //            if (component instanceof JTextField jTextField) {
-    //                System.out.println(jTextField.getText());
-    //            }
-    //        }
-    //    }
-    //    private static void writeFileData(String urlFile, Object obj) {
-    //        try {
-    //            ObjectOutputStream writingFile = new ObjectOutputStream(new FileOutputStream(urlFile));
-    //            writingFile.writeObject(obj);
-    //            writingFile.close();
-    //            runMenu();
-    //
-    //        } catch (FileNotFoundException e) {
-    //            throw new AssertionError(e.getMessage());
-    //        } catch (Exception e) {
-    //            throw new AssertionError(e.getMessage());
-    //        }
-    //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

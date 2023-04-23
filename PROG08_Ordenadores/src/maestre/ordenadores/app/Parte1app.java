@@ -25,9 +25,6 @@ public class Parte1app {
         System.out.println(msgBienvenida());
         generarArrayOrdenadores();
         showOrdenadores();
-        //showPortatiles();
-        //showSobremesa();
-        //seleccionarOrdenador();
         runMenu();
     }
 

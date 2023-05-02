@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 10 - PROGRAMACION
  */
 public class OracleConnection {
 

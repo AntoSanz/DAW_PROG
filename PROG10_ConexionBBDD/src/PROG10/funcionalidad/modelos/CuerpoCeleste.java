@@ -10,6 +10,7 @@ import java.io.Serializable;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 10 - PROGRAMACION
  */
 public class CuerpoCeleste implements Serializable {
 

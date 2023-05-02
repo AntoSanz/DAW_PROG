@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 10 - PROGRAMACION
  */
 public class EntornoGrafico extends javax.swing.JFrame {
 

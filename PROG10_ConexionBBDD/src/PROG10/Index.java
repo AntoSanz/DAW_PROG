@@ -9,6 +9,7 @@ import PROG10.entornografico.EntornoGrafico;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 10 - PROGRAMACION
  */
 public class Index {
 

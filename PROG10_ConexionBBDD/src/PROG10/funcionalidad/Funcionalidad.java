@@ -17,6 +17,7 @@ import java.sql.*;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 10 - PROGRAMACION
  */
 public class Funcionalidad extends PROG10.entornografico.EntornoGrafico {
 

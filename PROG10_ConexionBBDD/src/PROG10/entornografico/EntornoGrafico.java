@@ -13,13 +13,6 @@ import javax.swing.JOptionPane;
  * TEMA 10 - PROGRAMACION
  */
 public class EntornoGrafico extends javax.swing.JFrame {
-
-    //static ArrayList<CuerpoCeleste> cuerposCelestes = new ArrayList<>();
-    //static final String FILE_URL_SS = "./sistemasolar.dat";
-//    static final String CC_TIPO_1 = "Planeta";
-//    static final String CC_TIPO_2 = "Planeta enano";
-//    static final String CC_TIPO_3 = "Luna";
-//    static final String CUERPOS_CELESTES_NOT_FOUND = "No se han encontrado cuerpos celestes.";
     /**
      * Creates new form Index
      */

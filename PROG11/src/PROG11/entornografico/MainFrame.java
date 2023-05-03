@@ -1,7 +1,16 @@
 package PROG11.entornografico;
 
+import static PROG11.conexiones.oracle.OracleConnextion.*;
+import static PROG11.funcionalidad.Funcionalidad.parseRStoObject;
 import PROG11.funcionalidad.FuncionalidadEntornoGrafico;
 import static PROG11.funcionalidad.FuncionalidadEntornoGrafico.*;
+import PROG11.funcionalidad.modelos.Player;
+import PROG11.funcionalidad.modelos.Token;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -139,8 +148,35 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mainStartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainStartBtnActionPerformed
-        // TODO add your handling code here:
-        _openGameFrame();
+        // Busco en la BBDD si hay un player con el nombre proporcionado
+        try {
+            String res = JOptionPane.showInputDialog(this, "Introduce tu nombre (Diferencia entre mayúsculas y minúsculas)");
+            ResultSet rs = checkForPlayer(res);
+            Player p = parseRStoObject(rs);
+
+            if (p.getName() == null) {
+                //Si no coincide el nombre, crea un nuevo player con ese nombre
+                int resNewPlayer = JOptionPane.showConfirmDialog(this,
+                        "No se ha encontrado un jugador con ese nombre. ¿Desea crear uno nuevo?",
+                        "Crear nuevo jugador",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (resNewPlayer == JOptionPane.YES_OPTION) {
+                    Player player = new Player(res);
+                    createPlayer(player);
+                    Token.currentPlayer = player;
+                    _openGameFrame();
+                }
+            } else {
+                //Si hay un player con ese nombre, recupera el player
+                Token.currentPlayer = parseRStoObject(rs);
+                System.out.println("");
+                _openGameFrame();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //_openGameFrame();
     }//GEN-LAST:event_mainStartBtnActionPerformed
 
     private void mainRankBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainRankBtnActionPerformed

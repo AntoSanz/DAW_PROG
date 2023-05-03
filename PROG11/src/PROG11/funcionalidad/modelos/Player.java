@@ -9,6 +9,7 @@ package PROG11.funcionalidad.modelos;
  * @author ANTO
  */
 public class Player {
+
     private String name;
     private int power;
     private int multiclick;
@@ -17,6 +18,15 @@ public class Player {
     private int score;
 
     public Player() {
+    }
+
+    public Player(String name) {
+        this.name = name;
+        this.power = 0;
+        this.multiclick = 0;
+        this.cooldown = 0;
+        this.autoclick = false;
+        this.score = 0;
     }
 
     public Player(String name, int power, int multiclick, int cooldown, boolean autoclick, int score) {
@@ -80,6 +90,5 @@ public class Player {
     public String toString() {
         return "Player{" + "name=" + name + ", power=" + power + ", multiclick=" + multiclick + ", cooldown=" + cooldown + ", autoclick=" + autoclick + ", score=" + score + '}';
     }
-    
-    
+
 }

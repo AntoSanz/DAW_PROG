@@ -6,6 +6,7 @@ package PROG11.entornografico;
 
 import static PROG11.conexiones.oracle.OracleConnection.deletePlayer;
 import static PROG11.funcionalidad.FuncionalidadGameFrame.*;
+import PROG11.funcionalidad.modelos.Texts;
 import PROG11.funcionalidad.modelos.Token;
 import javax.swing.JOptionPane;
 
@@ -333,9 +334,10 @@ public class GameFrame extends javax.swing.JFrame {
 
     private void gameBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameBackBtnActionPerformed
         int resNewPlayer = JOptionPane.showConfirmDialog(this,
-                "AVISO: ¡Recuerde guardar su progreso! "
-                + "\n En la próxima sesión el contador de monedas comenzará de cero, pero las mejoras que haya obtenido y guardado, serán cargadas.",
-                "Confirmar acción: Volver a la pantalla de inicio",
+                Texts.WARN_SAVE_PROGRESS
+                + "\n "
+                + Texts.WARN_RESET_COINS,
+                Texts.CONFIRM_ACTION_BACK_TO_TITLE,
                 JOptionPane.YES_NO_OPTION);
 
         if (resNewPlayer == JOptionPane.YES_OPTION) {
@@ -371,8 +373,8 @@ public class GameFrame extends javax.swing.JFrame {
 
     private void gameDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameDeleteAccountActionPerformed
         int resNewPlayer = JOptionPane.showConfirmDialog(this,
-                "¿Seguro que desea borrar esta cuenta?",
-                "Confirmar acción: Borrado de cuenta",
+                Texts.WARN_DELETE_ACCOUNT,
+                Texts.CONFIRM_DELETE_ACCOUNT,
                 JOptionPane.YES_NO_OPTION);
 
         if (resNewPlayer == JOptionPane.YES_OPTION) {

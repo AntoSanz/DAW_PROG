@@ -5,6 +5,7 @@
 package PROG11.funcionalidad;
 
 import PROG11.funcionalidad.modelos.Player;
+import PROG11.funcionalidad.modelos.Texts;
 import PROG11.funcionalidad.modelos.Token;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class Funcionalidad {
         try {
             Token.currentPlayer = p;
         } catch (Exception e) {
-            System.err.println("Error al establecer el jugador actual en el token: " + e.getMessage());
+            System.err.println(Texts.ERROR_TOKEN + e.getMessage());
         }
     }
 
@@ -51,7 +52,7 @@ public class Funcionalidad {
             case "score" ->
                 Token.currentPlayer.setScore(value);
             default ->
-                 throw new IllegalArgumentException("ID inválido: " + id);
+                 throw new IllegalArgumentException(Texts.INVALID_ID + id);
         }
     }
 }

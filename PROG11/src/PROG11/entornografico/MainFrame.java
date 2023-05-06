@@ -7,6 +7,7 @@ import static PROG11.funcionalidad.FuncionalidadMainFrame.*;
 import PROG11.funcionalidad.UsernameValidator;
 import PROG11.funcionalidad.excepciones.InvalidUsernameException;
 import PROG11.funcionalidad.modelos.Player;
+import PROG11.funcionalidad.modelos.Texts;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -151,8 +152,8 @@ public class MainFrame extends javax.swing.JFrame {
                 if (p.getName() == null) {
                     //Si no coincide el nombre, crea un nuevo player con ese nombre
                     int resNewPlayer = JOptionPane.showConfirmDialog(this,
-                            "No se ha encontrado un jugador con ese nombre. ¿Desea crear uno nuevo?",
-                            "Crear nuevo jugador",
+                            Texts.NO_PLAYER_WITH_NAME_AND_CREATE,
+                            Texts.CREATE_NEW_PLAYER,
                             JOptionPane.YES_NO_OPTION);
 
                     if (resNewPlayer == JOptionPane.YES_OPTION) {
@@ -169,10 +170,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR SQL", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), Texts.ERROR_SQL, JOptionPane.ERROR_MESSAGE);
 
         } catch (InvalidUsernameException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Nombre incorrecto", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), Texts.ERROR_WRONG_NAME, JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_mainStartBtnActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

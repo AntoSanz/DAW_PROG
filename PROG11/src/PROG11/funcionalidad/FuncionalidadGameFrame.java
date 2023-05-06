@@ -9,6 +9,7 @@ import PROG11.entornografico.GameFrame;
 import PROG11.entornografico.MainFrame;
 import static PROG11.funcionalidad.Funcionalidad.updatePlayerToken;
 import static PROG11.funcionalidad.TempoControl.tempoClickInMonster;
+import PROG11.funcionalidad.modelos.Texts;
 import PROG11.funcionalidad.modelos.Token;
 import PROG11.funcionalidad.modelos.Values;
 import javax.swing.JOptionPane;
@@ -118,7 +119,7 @@ public class FuncionalidadGameFrame {
             setPowerLabel();
             updatePlayerToken("power", powerLevel);
         } else {
-            showErrorMessagePanel("No hay monedas suficientes", "Error");
+            showErrorMessagePanel(Texts.NO_COINS, Texts.ERROR);
         }
     }
 
@@ -136,7 +137,7 @@ public class FuncionalidadGameFrame {
             updatePlayerToken("cooldown", cooldownLevel);
 
         } else {
-            showErrorMessagePanel("No hay monedas suficientes", "Error");
+            showErrorMessagePanel(Texts.NO_COINS, Texts.ERROR);
         }
     }
 
@@ -151,7 +152,7 @@ public class FuncionalidadGameFrame {
             updatePlayerToken("multiclick", multiclickLevel);
 
         } else {
-            showErrorMessagePanel("No hay monedas suficientes", "Error");
+            showErrorMessagePanel(Texts.NO_COINS, Texts.ERROR);
         }
     }
 
@@ -166,18 +167,19 @@ public class FuncionalidadGameFrame {
             GameFrame.gamePowersLabel.setVisible(true);
         }
     }
-    
+
     /**
      * Guarda el progreso actual en la BD
      */
     public static void saveProgress() {
         updatePlayer(Token.currentPlayer);
     }
-    
+
     /**
      * Muestra un mensaje de error en una ventana nueva
+     *
      * @param msg
-     * @param title 
+     * @param title
      */
     public static void showErrorMessagePanel(String msg, String title) {
         GameFrame gf = new GameFrame();

@@ -29,8 +29,11 @@ public class Funcionalidad {
     }
 
     public static void setCurrentPlayerInToken(Player p) {
-        Token.currentPlayer = p;
-        System.out.println("DEBUG");
+        try {
+            Token.currentPlayer = p;
+        } catch (Exception e) {
+            System.err.println("Error al establecer el jugador actual en el token: " + e.getMessage());
+        }
     }
 
     public static void updatePlayerToken(String id, int value) {
@@ -48,7 +51,7 @@ public class Funcionalidad {
             case "score" ->
                 Token.currentPlayer.setScore(value);
             default ->
-                throw new AssertionError();
+                 throw new IllegalArgumentException("ID inválido: " + id);
         }
     }
 }

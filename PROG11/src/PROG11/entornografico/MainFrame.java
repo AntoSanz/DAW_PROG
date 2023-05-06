@@ -141,26 +141,28 @@ public class MainFrame extends javax.swing.JFrame {
         // Busco en la BBDD si hay un player con el nombre proporcionado
         try {
             String res = JOptionPane.showInputDialog(this, "Introduce tu nombre (Diferencia entre mayúsculas y minúsculas)");
-            ResultSet rs = checkForPlayer(res);
-            Player p = parseRStoObject(rs);
+            if (res != null) {
+                ResultSet rs = checkForPlayer(res);
+                Player p = parseRStoObject(rs);
 
-            if (p.getName() == null) {
-                //Si no coincide el nombre, crea un nuevo player con ese nombre
-                int resNewPlayer = JOptionPane.showConfirmDialog(this,
-                        "No se ha encontrado un jugador con ese nombre. ¿Desea crear uno nuevo?",
-                        "Crear nuevo jugador",
-                        JOptionPane.YES_NO_OPTION);
+                if (p.getName() == null) {
+                    //Si no coincide el nombre, crea un nuevo player con ese nombre
+                    int resNewPlayer = JOptionPane.showConfirmDialog(this,
+                            "No se ha encontrado un jugador con ese nombre. ¿Desea crear uno nuevo?",
+                            "Crear nuevo jugador",
+                            JOptionPane.YES_NO_OPTION);
 
-                if (resNewPlayer == JOptionPane.YES_OPTION) {
-                    Player player = new Player(res);
-                    createPlayer(player);
-                    setCurrentPlayerInToken(player);
+                    if (resNewPlayer == JOptionPane.YES_OPTION) {
+                        Player player = new Player(res);
+                        createPlayer(player);
+                        setCurrentPlayerInToken(player);
+                        _openGameFrame();
+                    }
+                } else {
+                    //Si hay un player con ese nombre, recupera el player
+                    setCurrentPlayerInToken(p);
                     _openGameFrame();
                 }
-            } else {
-                //Si hay un player con ese nombre, recupera el player
-                setCurrentPlayerInToken(p);
-                _openGameFrame();
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +182,6 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Navegación entre frames
-    
     /**
      * Abrir GameFrame
      */

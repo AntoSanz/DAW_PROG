@@ -350,15 +350,15 @@ public class GameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_gameMonsterBtnActionPerformed
 
     private void gameAddPowerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddPowerBtnActionPerformed
-        levelUpPower();
+        upgradePower();
     }//GEN-LAST:event_gameAddPowerBtnActionPerformed
 
     private void gameAddClicksCdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddClicksCdBtnActionPerformed
-        levelUpClickCooldown();
+        upgradeCooldown();
     }//GEN-LAST:event_gameAddClicksCdBtnActionPerformed
 
     private void gameAddMulticlickBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddMulticlickBtnActionPerformed
-        levelUpMulticlick();
+        upgradeMulticlick();
     }//GEN-LAST:event_gameAddMulticlickBtnActionPerformed
 
     private void gameShowPowersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameShowPowersActionPerformed

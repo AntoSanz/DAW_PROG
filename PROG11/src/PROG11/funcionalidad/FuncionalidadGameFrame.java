@@ -11,6 +11,7 @@ import static PROG11.funcionalidad.Funcionalidad.updatePlayerToken;
 import static PROG11.funcionalidad.TempoControl.tempoClickInMonster;
 import PROG11.funcionalidad.modelos.Token;
 import PROG11.funcionalidad.modelos.Values;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,6 +38,7 @@ public class FuncionalidadGameFrame {
         autoclick = false;
         setUpdatedValues();
     }
+
     /**
      * Importa los valores del token en los campos correspondientes
      */
@@ -50,7 +52,7 @@ public class FuncionalidadGameFrame {
             setUpdatedValues();
         }
     }
-    
+
     //Actualizar labels
     public static void setUpdatedValues() {
         setCoinLabel();
@@ -58,8 +60,6 @@ public class FuncionalidadGameFrame {
         setCooldownLabel();
         setMulticlickLabel();
     }
-
-
 
     public static void setCoinLabel() {
         GameFrame.gameCoinNumberLabel.setText(Integer.toString(coins));
@@ -108,30 +108,27 @@ public class FuncionalidadGameFrame {
     /**
      * Aumenta el nivel de poder si tienes monedas
      */
-    public static void levelUpPower() {
+    public static void upgradePower() {
         Values v = new Values();
         int cost = v.getPowerCost(powerLevel);
         if (coins >= cost) {
-            System.out.println("DEBUG: Gasta monedas");
             coins = coins - cost;
             powerLevel++;
             setCoinLabel();
             setPowerLabel();
             updatePlayerToken("power", powerLevel);
         } else {
-            System.out.println("DEBUG: No hay monedas suficientes");
+            showErrorMessagePanel("No hay monedas suficientes", "Error");
         }
-
     }
 
     /**
      * Aumenta el nivel de Coooldown si tienes monedas
      */
-    public static void levelUpClickCooldown() {
+    public static void upgradeCooldown() {
         Values v = new Values();
         int cost = v.getCooldownReductionCost(cooldownLevel);
         if (coins >= cost) {
-            System.out.println("DEBUG: Gasta monedas");
             coins = coins - cost;
             cooldownLevel++;
             setCoinLabel();
@@ -139,15 +136,14 @@ public class FuncionalidadGameFrame {
             updatePlayerToken("cooldown", cooldownLevel);
 
         } else {
-            System.out.println("DEBUG: No hay monedas suficientes");
+            showErrorMessagePanel("No hay monedas suficientes", "Error");
         }
     }
 
-    public static void levelUpMulticlick() {
+    public static void upgradeMulticlick() {
         Values v = new Values();
         int cost = v.getMulticlickCost(multiclickLevel);
         if (coins >= cost) {
-            System.out.println("DEBUG: Gasta monedas");
             coins = coins - cost;
             multiclickLevel++;
             setCoinLabel();
@@ -155,27 +151,7 @@ public class FuncionalidadGameFrame {
             updatePlayerToken("multiclick", multiclickLevel);
 
         } else {
-            System.out.println("DEBUG: No hay monedas suficientes");
-        }
-    }
-
-    /**
-     * Activa el autoclick si tienes monedas
-     */
-    public static void levelUpAutoclick() {
-
-        Values v = new Values();
-        int cost = v.getAutoclickCost(autoclick);
-        if (coins >= cost) {
-            System.out.println("DEBUG: Gasta monedas");
-            coins = coins - cost;
-            autoclick = true;
-            setCoinLabel();
-            //setAutoclickLabel();
-            updatePlayerToken("autoclick", autoclick == true ? 1 : 0);
-
-        } else {
-            System.out.println("DEBUG: No hay monedas suficientes");
+            showErrorMessagePanel("No hay monedas suficientes", "Error");
         }
     }
 
@@ -190,12 +166,21 @@ public class FuncionalidadGameFrame {
             GameFrame.gamePowersLabel.setVisible(true);
         }
     }
-
+    
+    /**
+     * Guarda el progreso actual en la BD
+     */
     public static void saveProgress() {
         updatePlayer(Token.currentPlayer);
     }
-
-    public static void automaticGrouth(){
-        
+    
+    /**
+     * Muestra un mensaje de error en una ventana nueva
+     * @param msg
+     * @param title 
+     */
+    public static void showErrorMessagePanel(String msg, String title) {
+        GameFrame gf = new GameFrame();
+        JOptionPane.showMessageDialog(gf, msg, title, JOptionPane.ERROR_MESSAGE);
     }
 }

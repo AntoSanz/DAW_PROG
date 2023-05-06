@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.Texts to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package PROG11.entornografico;
 
 import static PROG11.conexiones.oracle.OracleConnection.deletePlayer;
@@ -13,6 +9,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 11
  */
 public class GameFrame extends javax.swing.JFrame {
 

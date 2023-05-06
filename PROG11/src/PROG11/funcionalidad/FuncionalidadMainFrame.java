@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.Texts to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PROG11.funcionalidad;
 
 import PROG11.entornografico.*;
@@ -9,6 +5,7 @@ import PROG11.entornografico.*;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 11
  */
 public class FuncionalidadMainFrame {
 

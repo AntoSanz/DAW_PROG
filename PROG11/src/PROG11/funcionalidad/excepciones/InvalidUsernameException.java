@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PROG11.funcionalidad.excepciones;
 
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 11
  */
 public class InvalidUsernameException extends Exception{
          public InvalidUsernameException(String msg) {

@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PROG11.conexiones.oracle;
 
 import PROG11.funcionalidad.modelos.Player;
 import java.sql.*;
-import oracle.jdbc.*;
 import oracle.jdbc.pool.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +9,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author ANTONIO SANZ PANS
+ * TEMA 11
  */
 public class OracleConnection {
 

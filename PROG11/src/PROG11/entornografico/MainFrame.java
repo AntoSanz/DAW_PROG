@@ -144,8 +144,9 @@ public class MainFrame extends javax.swing.JFrame {
         // Busco en la BBDD si hay un player con el nombre proporcionado
         try {
             String res = JOptionPane.showInputDialog(this, "Introduce tu nombre (Diferencia entre mayúsculas y minúsculas)");
-            UsernameValidator.validateUsername(res);
             if (res != null) {
+                UsernameValidator.validateUsername(res);
+
                 ResultSet rs = checkForPlayer(res);
                 Player p = parseRStoObject(rs);
 

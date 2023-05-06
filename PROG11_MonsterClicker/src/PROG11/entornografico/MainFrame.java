@@ -158,11 +158,13 @@ public class MainFrame extends javax.swing.JFrame {
                         Player player = new Player(res);
                         createPlayer(player);
                         setCurrentPlayerInToken(player);
+                        this.setVisible(false);
                         openGameFrame();
                     }
                 } else {
                     //Si hay un player con ese nombre, recupera el player
                     setCurrentPlayerInToken(p);
+                    this.setVisible(false);
                     openGameFrame();
                 }
             }

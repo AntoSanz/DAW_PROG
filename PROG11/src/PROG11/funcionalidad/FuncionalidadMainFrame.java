@@ -10,7 +10,7 @@ import PROG11.entornografico.*;
  *
  * @author ANTONIO SANZ PANS
  */
-public class FuncionalidadEntornoGrafico {
+public class FuncionalidadMainFrame {
 
     public static void openGameFrame() {
         GameFrame gf = new GameFrame();

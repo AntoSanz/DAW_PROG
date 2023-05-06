@@ -14,4 +14,7 @@ public class Texts {
     public final static String GAME_FRAME = "gameframe";
     public final static String RANK_FRAME = "rankframe";
     public final static String VERSION = "1.0.0";
+    public final static String ERROR_NAME_VOID = "El nombre de usuario no puede estar vacío";
+    public final static String ERROR_NAME_SPACE_SPECIALCHAR = "El nombre de usuario no puede contener espacios en blanco o caracteres especiales";
+    public final static String ERROR_NAME_ACCENTS_OR_SPECHIALCHAR = "El nombre de usuario no puede contener caracteres especiales como acentos o la letra ñ";
 }

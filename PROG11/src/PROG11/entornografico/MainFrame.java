@@ -3,7 +3,9 @@ package PROG11.entornografico;
 import static PROG11.conexiones.oracle.OracleConnection.*;
 import static PROG11.funcionalidad.Funcionalidad.parseRStoObject;
 import static PROG11.funcionalidad.Funcionalidad.setCurrentPlayerInToken;
-import static PROG11.funcionalidad.FuncionalidadEntornoGrafico.*;
+import static PROG11.funcionalidad.FuncionalidadMainFrame.*;
+import PROG11.funcionalidad.UsernameValidator;
+import PROG11.funcionalidad.excepciones.InvalidUsernameException;
 import PROG11.funcionalidad.modelos.Player;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -141,6 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Busco en la BBDD si hay un player con el nombre proporcionado
         try {
             String res = JOptionPane.showInputDialog(this, "Introduce tu nombre (Diferencia entre mayúsculas y minúsculas)");
+            UsernameValidator.validateUsername(res);
             if (res != null) {
                 ResultSet rs = checkForPlayer(res);
                 Player p = parseRStoObject(rs);
@@ -156,16 +159,20 @@ public class MainFrame extends javax.swing.JFrame {
                         Player player = new Player(res);
                         createPlayer(player);
                         setCurrentPlayerInToken(player);
-                        _openGameFrame();
+                        openGameFrame();
                     }
                 } else {
                     //Si hay un player con ese nombre, recupera el player
                     setCurrentPlayerInToken(p);
-                    _openGameFrame();
+                    openGameFrame();
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR SQL", JOptionPane.ERROR_MESSAGE);
+
+        } catch (InvalidUsernameException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Nombre incorrecto", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_mainStartBtnActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,13 +187,4 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel mainVersionLabel;
     // End of variables declaration//GEN-END:variables
-
-    //Navegación entre frames
-    /**
-     * Abrir GameFrame
-     */
-    private void _openGameFrame() {
-        setVisible(false);
-        openGameFrame();
-    }
 }

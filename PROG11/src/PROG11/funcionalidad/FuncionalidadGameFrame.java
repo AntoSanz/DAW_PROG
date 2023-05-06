@@ -4,7 +4,7 @@
  */
 package PROG11.funcionalidad;
 
-import static PROG11.conexiones.oracle.OracleConnextion.updatePlayer;
+import static PROG11.conexiones.oracle.OracleConnection.updatePlayer;
 import PROG11.entornografico.GameFrame;
 import PROG11.entornografico.MainFrame;
 import static PROG11.funcionalidad.Funcionalidad.updatePlayerToken;

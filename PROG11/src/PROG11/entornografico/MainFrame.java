@@ -1,6 +1,6 @@
 package PROG11.entornografico;
 
-import static PROG11.conexiones.oracle.OracleConnextion.*;
+import static PROG11.conexiones.oracle.OracleConnection.*;
 import static PROG11.funcionalidad.Funcionalidad.parseRStoObject;
 import static PROG11.funcionalidad.Funcionalidad.setCurrentPlayerInToken;
 import static PROG11.funcionalidad.FuncionalidadEntornoGrafico.*;

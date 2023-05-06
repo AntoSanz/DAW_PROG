@@ -4,7 +4,7 @@
  */
 package PROG11.entornografico;
 
-import static PROG11.conexiones.oracle.OracleConnextion.deletePlayer;
+import static PROG11.conexiones.oracle.OracleConnection.deletePlayer;
 import static PROG11.funcionalidad.FuncionalidadGameFrame.*;
 import PROG11.funcionalidad.modelos.Token;
 import javax.swing.JOptionPane;

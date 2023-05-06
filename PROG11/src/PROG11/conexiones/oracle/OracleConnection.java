@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author ANTONIO SANZ PANS
  */
-public class OracleConnextion {
+public class OracleConnection {
 
     private static Connection conn = null;
     private static final String SID = "XE";

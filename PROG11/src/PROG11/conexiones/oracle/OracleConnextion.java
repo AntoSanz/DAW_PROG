@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class OracleConnextion {
 
@@ -60,12 +60,13 @@ public class OracleConnextion {
     public static Connection getConn() {
         return conn;
     }
-    public static ResultSet checkForPlayer(String name){
-    try {
+
+    public static ResultSet checkForPlayer(String name) {
+        try {
             //Construir conexion
             construirConexion(SID, USER, PWD);
             //Crear la consulta SQL
-            String SQLquery = "SELECT * FROM PLAYERS WHERE name=?"; 
+            String SQLquery = "SELECT * FROM PLAYERS WHERE name=?";
 
             //Preparar la ejecucion de la sentencia SQL
             PreparedStatement ps = conn.prepareStatement(SQLquery, Statement.RETURN_GENERATED_KEYS);
@@ -81,7 +82,7 @@ public class OracleConnextion {
             return null;
         }
     }
-    
+
     public static int createPlayer(Player p) {
         try {
             //Construir conexion
@@ -96,13 +97,63 @@ public class OracleConnextion {
 
             //Establecer los valores para la consulta SQL
             int autoclick = p.isAutoclick() ? 1 : 0;
-            
+
             ps.setString(1, p.getName());
             ps.setInt(2, p.getPower());
             ps.setInt(3, p.getMulticlick());
             ps.setInt(4, p.getCooldown());
             ps.setInt(5, autoclick);
             ps.setInt(6, p.getScore());
+            //Ejecutar la consulta
+            int res = ps.executeUpdate();
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(OracleConnection.class.getName()).log(Level.SEVERE, null, ex);
+            conn = null;
+            return 0;
+        }
+    }
+
+    public static int updatePlayer(Player p) {
+        try {
+            //Construir conexion
+            construirConexion(SID, USER, PWD);
+            //Crear la consulta SQL
+            String SQLquery = "UPDATE PLAYERS SET power=?, multiclick=?, cooldown=?, autoclick=?, score=?  WHERE name=?";
+
+            //Preparar la ejecucion de la sentencia SQL
+            PreparedStatement ps = conn.prepareStatement(SQLquery, Statement.RETURN_GENERATED_KEYS);
+
+            //Establecer los valores para la consulta SQL
+            int autoclick = p.isAutoclick() ? 1 : 0;
+
+            ps.setInt(1, p.getPower());
+            ps.setInt(2, p.getMulticlick());
+            ps.setInt(3, p.getCooldown());
+            ps.setInt(4, autoclick);
+            ps.setInt(5, p.getScore());
+            ps.setString(6, p.getName());
+
+            //Ejecutar la consulta
+            int res = ps.executeUpdate();
+            return res;
+        } catch (SQLException ex) {
+            Logger.getLogger(OracleConnection.class.getName()).log(Level.SEVERE, null, ex);
+            conn = null;
+            return 0;
+        }
+    }
+
+    public static int deletePlayer(Player p) {
+        try {
+            //Construir conexion
+            construirConexion(SID, USER, PWD);
+            //Crear la consulta SQL
+            String SQLquery = "DELETE FROM PLAYERS WHERE name=?";
+
+            //Preparar la ejecucion de la sentencia SQL
+            PreparedStatement ps = conn.prepareStatement(SQLquery, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, p.getName());
             //Ejecutar la consulta
             int res = ps.executeUpdate();
             return res;

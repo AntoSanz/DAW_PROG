@@ -2,10 +2,9 @@ package PROG11.entornografico;
 
 import static PROG11.conexiones.oracle.OracleConnextion.*;
 import static PROG11.funcionalidad.Funcionalidad.parseRStoObject;
-import PROG11.funcionalidad.FuncionalidadEntornoGrafico;
+import static PROG11.funcionalidad.Funcionalidad.setCurrentPlayerInToken;
 import static PROG11.funcionalidad.FuncionalidadEntornoGrafico.*;
 import PROG11.funcionalidad.modelos.Player;
-import PROG11.funcionalidad.modelos.Token;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -18,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -40,112 +39,103 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         mainTitleLabel = new javax.swing.JLabel();
-        mainStartBtn = new javax.swing.JButton();
-        mainRankBtn = new javax.swing.JButton();
-        MainExitBtn = new javax.swing.JButton();
-        mainAuthorLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        mainAuthorVersion = new javax.swing.JPanel();
         mainVersionLabel = new javax.swing.JLabel();
+        mainAuthorLabel = new javax.swing.JLabel();
+        mainBtnPanel = new javax.swing.JPanel();
+        mainStartBtn = new javax.swing.JButton();
+        MainExitBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 51, 51));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setMaximumSize(new java.awt.Dimension(800, 475));
+        setMinimumSize(new java.awt.Dimension(800, 475));
         setResizable(false);
 
-        mainPanel.setBackground(new java.awt.Color(204, 204, 255));
-        mainPanel.setMaximumSize(new java.awt.Dimension(800, 600));
-        mainPanel.setMinimumSize(new java.awt.Dimension(800, 600));
-        mainPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        mainPanel.setMaximumSize(new java.awt.Dimension(500, 280));
+        mainPanel.setMinimumSize(new java.awt.Dimension(500, 280));
+        mainPanel.setPreferredSize(new java.awt.Dimension(500, 280));
+        mainPanel.setLayout(null);
 
-        mainTitleLabel.setFont(new java.awt.Font("Consolas", 0, 60)); // NOI18N
+        mainTitleLabel.setFont(new java.awt.Font("Consolas", 0, 55)); // NOI18N
         mainTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mainTitleLabel.setText("TITULO DEL JUEGO");
+        mainTitleLabel.setText("MONSTER CLICKER");
+        mainPanel.add(mainTitleLabel);
+        mainTitleLabel.setBounds(10, 90, 470, 65);
 
-        mainStartBtn.setText("mainStartBtn");
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setMaximumSize(new java.awt.Dimension(850, 475));
+        jPanel3.setMinimumSize(new java.awt.Dimension(850, 475));
+        jPanel3.setPreferredSize(new java.awt.Dimension(850, 475));
+        jPanel3.setLayout(null);
+
+        mainAuthorVersion.setOpaque(false);
+        mainAuthorVersion.setLayout(null);
+
+        mainVersionLabel.setText("v1.0.0");
+        mainAuthorVersion.add(mainVersionLabel);
+        mainVersionLabel.setBounds(0, 26, 150, 20);
+
+        mainAuthorLabel.setText("Antonio Sanz Pans");
+        mainAuthorVersion.add(mainAuthorLabel);
+        mainAuthorLabel.setBounds(0, 0, 173, 22);
+
+        jPanel3.add(mainAuthorVersion);
+        mainAuthorVersion.setBounds(10, 10, 110, 60);
+
+        mainBtnPanel.setOpaque(false);
+        mainBtnPanel.setLayout(null);
+
+        mainStartBtn.setText("JUGAR");
         mainStartBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mainStartBtnActionPerformed(evt);
             }
         });
+        mainBtnPanel.add(mainStartBtn);
+        mainStartBtn.setBounds(6, 0, 200, 50);
 
-        mainRankBtn.setText("mainRankBtn");
-        mainRankBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mainRankBtnActionPerformed(evt);
-            }
-        });
-
-        MainExitBtn.setText("MainExitBtn");
+        MainExitBtn.setText("SALIR");
         MainExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MainExitBtnActionPerformed(evt);
             }
         });
+        mainBtnPanel.add(MainExitBtn);
+        MainExitBtn.setBounds(6, 60, 200, 50);
 
-        mainAuthorLabel.setText("mainAuthorLabel");
+        jPanel3.add(mainBtnPanel);
+        mainBtnPanel.setBounds(140, 150, 210, 190);
 
-        mainVersionLabel.setText("v1.0.0");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PROG11/resources/backgroud/monster_bg.png"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(850, 475));
+        jLabel1.setMinimumSize(new java.awt.Dimension(850, 475));
+        jLabel1.setPreferredSize(new java.awt.Dimension(850, 475));
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(0, 0, 804, 475);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(mainStartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(mainRankBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(MainExitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainVersionLabel)
-                .addContainerGap())
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(mainTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mainStartBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mainRankBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(MainExitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainVersionLabel)
-                    .addComponent(mainAuthorLabel))
-                .addContainerGap())
-        );
+        mainPanel.add(jPanel3);
+        jPanel3.setBounds(0, 0, 800, 475);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MainExitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainExitBtnActionPerformed
+        closeApp();
+    }//GEN-LAST:event_MainExitBtnActionPerformed
 
     private void mainStartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainStartBtnActionPerformed
         // Busco en la BBDD si hay un player con el nombre proporcionado
@@ -164,53 +154,38 @@ public class MainFrame extends javax.swing.JFrame {
                 if (resNewPlayer == JOptionPane.YES_OPTION) {
                     Player player = new Player(res);
                     createPlayer(player);
-                    Token.currentPlayer = player;
+                    setCurrentPlayerInToken(player);
                     _openGameFrame();
                 }
             } else {
                 //Si hay un player con ese nombre, recupera el player
-                Token.currentPlayer = parseRStoObject(rs);
-                System.out.println("");
+                setCurrentPlayerInToken(p);
                 _openGameFrame();
             }
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //_openGameFrame();
     }//GEN-LAST:event_mainStartBtnActionPerformed
-
-    private void mainRankBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainRankBtnActionPerformed
-        // TODO add your handling code here:
-        _openRankFrame();
-    }//GEN-LAST:event_mainRankBtnActionPerformed
-
-    private void MainExitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainExitBtnActionPerformed
-        // TODO add your handling code here:
-        closeApp();
-    }//GEN-LAST:event_MainExitBtnActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton MainExitBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel mainAuthorLabel;
+    private javax.swing.JPanel mainAuthorVersion;
+    private javax.swing.JPanel mainBtnPanel;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton mainRankBtn;
     private javax.swing.JButton mainStartBtn;
     private javax.swing.JLabel mainTitleLabel;
     private javax.swing.JLabel mainVersionLabel;
     // End of variables declaration//GEN-END:variables
 
-    //navegación entre frames
+    //Navegación entre frames
+    
+    /**
+     * Abrir GameFrame
+     */
     private void _openGameFrame() {
         setVisible(false);
         openGameFrame();
-    }
-
-    private void _openRankFrame() {
-        setVisible(false);
-        openRankFrame();
     }
 }

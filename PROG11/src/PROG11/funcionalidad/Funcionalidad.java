@@ -5,6 +5,7 @@
 package PROG11.funcionalidad;
 
 import PROG11.funcionalidad.modelos.Player;
+import PROG11.funcionalidad.modelos.Token;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,5 +26,29 @@ public class Funcionalidad {
             player.setScore(rs.getInt("score"));
         }
         return player;
+    }
+
+    public static void setCurrentPlayerInToken(Player p) {
+        Token.currentPlayer = p;
+        System.out.println("DEBUG");
+    }
+
+    public static void updatePlayerToken(String id, int value) {
+        switch (id) {
+            case "power" ->
+                Token.currentPlayer.setPower(value);
+            case "multiclick" ->
+                Token.currentPlayer.setMulticlick(value);
+            case "cooldown" ->
+                Token.currentPlayer.setCooldown(value);
+            case "autoclick" -> {
+                Boolean bValue = value == 1;
+                Token.currentPlayer.setAutoclick(bValue);
+            }
+            case "score" ->
+                Token.currentPlayer.setScore(value);
+            default ->
+                throw new AssertionError();
+        }
     }
 }

@@ -6,11 +6,9 @@ package PROG11.funcionalidad;
 
 import PROG11.entornografico.*;
 
-import PROG11.funcionalidad.modelos.Texts;
-
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class FuncionalidadEntornoGrafico {
 
@@ -18,13 +16,6 @@ public class FuncionalidadEntornoGrafico {
         GameFrame gf = new GameFrame();
         gf.setVisible(true);
     }
-
-    public static void openRankFrame() {
-        RankFrame rf = new RankFrame();
-        rf.setVisible(true);
-    }
-
-
 
     public static void closeApp() {
         System.exit(0);

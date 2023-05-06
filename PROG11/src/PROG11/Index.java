@@ -6,11 +6,10 @@ package PROG11;
 
 import PROG11.entornografico.GameFrame;
 import PROG11.entornografico.MainFrame;
-import PROG11.entornografico.RankFrame;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class Index {
 
@@ -37,8 +36,6 @@ public class Index {
         java.awt.EventQueue.invokeLater(() -> {
             new MainFrame().setVisible(true);
             new GameFrame().setVisible(false);
-            new RankFrame().setVisible(false);
-
         });
     }
 }

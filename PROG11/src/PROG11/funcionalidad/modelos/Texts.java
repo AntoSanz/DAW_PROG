@@ -6,7 +6,7 @@ package PROG11.funcionalidad.modelos;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class Texts {
 

@@ -70,7 +70,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="gameMonsterBtn" min="-2" pref="558" max="-2" attributes="0"/>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="gameBackBtn" min="-2" max="-2" attributes="0"/>
@@ -84,15 +84,16 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="gameShowPowers" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="gamePowersLabel" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="versionLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Component id="gamePowersLabel" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="versionLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="gameSaveProgress" max="32767" attributes="0"/>
+                      <Component id="jLabel1" max="32767" attributes="0"/>
+                      <Component id="gameDeleteAccount" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -117,11 +118,17 @@
                       <Component id="gameMonsterBtn" min="-2" pref="499" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="gamePowersLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="gameSaveProgress" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="gameDeleteAccount" min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="versionLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -129,7 +136,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="gameBackBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="gameBackBtn"/>
+            <Property name="text" type="java.lang.String" value="Volver"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameBackBtnActionPerformed"/>
@@ -137,7 +144,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="gameShowPowers">
           <Properties>
-            <Property name="text" type="java.lang.String" value="gameShowPowers"/>
+            <Property name="text" type="java.lang.String" value="Mostrar mejoras"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameShowPowersActionPerformed"/>
@@ -148,6 +155,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="ff" type="rgb"/>
             </Property>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -162,7 +170,6 @@
                           <Component id="gameAddPowerPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="gameAddClicksCdPanel" alignment="0" max="32767" attributes="0"/>
                           <Component id="gameAddMulticlickPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="gameAddAutoclickPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -177,9 +184,7 @@
                       <Component id="gameAddClicksCdPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="gameAddMulticlickPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="gameAddAutoclickPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -196,7 +201,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="gameAddPowerLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="gameAddPowerCountLabel" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="gameAddPowerCountLabel" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -204,10 +209,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="gameAddPowerBtn" alignment="3" max="32767" attributes="0"/>
-                              <Component id="gameAddPowerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="gameAddPowerCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="gameAddPowerCountLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddPowerLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddPowerBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -217,7 +222,18 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="gameAddPowerBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/PROG11/utils/icons/arrow-up-20.png"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameAddPowerBtnActionPerformed"/>
@@ -249,7 +265,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="gameAddClicksCdLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="gameAddClicksCdCountLabel" pref="27" max="32767" attributes="0"/>
+                          <Component id="gameAddClicksCdCountLabel" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -257,10 +273,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="gameAddClicksCdBtn" alignment="3" max="32767" attributes="0"/>
-                              <Component id="gameAddClicksCdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="gameAddClicksCdCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="gameAddClicksCdCountLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddClicksCdLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddClicksCdBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -270,7 +286,18 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="gameAddClicksCdBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/PROG11/utils/icons/arrow-up-20.png"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameAddClicksCdBtnActionPerformed"/>
@@ -302,7 +329,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="gameAddMulticlickLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="gameAddMulticlickCountLabel" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="gameAddMulticlickCountLabel" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -310,10 +337,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="gameAddMulticlickBtn" alignment="3" max="32767" attributes="0"/>
-                              <Component id="gameAddMulticlickLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="gameAddMulticlickCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="gameAddMulticlickCountLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddMulticlickLabel" max="32767" attributes="0"/>
+                              <Component id="gameAddMulticlickBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -323,7 +350,18 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="gameAddMulticlickBtn">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/PROG11/utils/icons/arrow-up-20.png"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[30, 30]"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameAddMulticlickBtnActionPerformed"/>
@@ -337,70 +375,14 @@
                 <Component class="javax.swing.JLabel" name="gameAddMulticlickCountLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                  </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="gameAddAutoclickPanel">
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gameAddAutoclickBtn" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="gameAddAutoclickLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="gameAddAutoclickCountLabel" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="gameAddAutoclickBtn" alignment="3" max="32767" attributes="0"/>
-                              <Component id="gameAddAutoclickLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="gameAddAutoclickCountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JButton" name="gameAddAutoclickBtn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="+"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameAddAutoclickBtnActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="gameAddAutoclickLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Autoclick"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="gameAddAutoclickCountLabel">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="false"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[25, 16]"/>
+                      <Dimension value="[35, 16]"/>
                     </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[25, 16]"/>
+                      <Dimension value="[35, 16]"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[25, 16]"/>
+                      <Dimension value="[35, 16]"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -449,6 +431,43 @@
               <Connection code="&quot;v&quot; + PROG11.funcionalidad.modelos.Texts.VERSION" type="code"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="gameSaveProgress">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="cc" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="GUARDAR PROGRESO"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameSaveProgressActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&#xa1;Haz click en el monstruo!"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="gameDeleteAccount">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="BORRAR CUENTA"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameDeleteAccountActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

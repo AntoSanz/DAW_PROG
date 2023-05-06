@@ -4,13 +4,14 @@
  */
 package PROG11.entornografico;
 
-import static PROG11.funcionalidad.FuncionalidadEntornoGrafico.*;
+import static PROG11.conexiones.oracle.OracleConnextion.deletePlayer;
 import static PROG11.funcionalidad.FuncionalidadGameFrame.*;
-import PROG11.funcionalidad.modelos.Texts;
+import PROG11.funcionalidad.modelos.Token;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class GameFrame extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class GameFrame extends javax.swing.JFrame {
      */
     public GameFrame() {
         initComponents();
+        updateValuesWhitToken();
     }
 
     /**
@@ -46,14 +48,13 @@ public class GameFrame extends javax.swing.JFrame {
         gameAddMulticlickBtn = new javax.swing.JButton();
         gameAddMulticlickLabel = new javax.swing.JLabel();
         gameAddMulticlickCountLabel = new javax.swing.JLabel();
-        gameAddAutoclickPanel = new javax.swing.JPanel();
-        gameAddAutoclickBtn = new javax.swing.JButton();
-        gameAddAutoclickLabel = new javax.swing.JLabel();
-        gameAddAutoclickCountLabel = new javax.swing.JLabel();
         gameMonsterBtn = new javax.swing.JButton();
         gameCoinIconLabel = new javax.swing.JLabel();
         gameCoinNumberLabel = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
+        gameSaveProgress = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        gameDeleteAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
@@ -67,14 +68,14 @@ public class GameFrame extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        gameBackBtn.setText("gameBackBtn");
+        gameBackBtn.setText("Volver");
         gameBackBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameBackBtnActionPerformed(evt);
             }
         });
 
-        gameShowPowers.setText("gameShowPowers");
+        gameShowPowers.setText("Mostrar mejoras");
         gameShowPowers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameShowPowersActionPerformed(evt);
@@ -82,8 +83,12 @@ public class GameFrame extends javax.swing.JFrame {
         });
 
         gamePowersLabel.setBackground(new java.awt.Color(255, 204, 204));
+        gamePowersLabel.setOpaque(false);
 
-        gameAddPowerBtn.setText("+");
+        gameAddPowerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PROG11/utils/icons/arrow-up-20.png"))); // NOI18N
+        gameAddPowerBtn.setMaximumSize(new java.awt.Dimension(30, 30));
+        gameAddPowerBtn.setMinimumSize(new java.awt.Dimension(30, 30));
+        gameAddPowerBtn.setPreferredSize(new java.awt.Dimension(30, 30));
         gameAddPowerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameAddPowerBtnActionPerformed(evt);
@@ -104,20 +109,23 @@ public class GameFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameAddPowerLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(gameAddPowerCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(gameAddPowerCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         gameAddPowerPanelLayout.setVerticalGroup(
             gameAddPowerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gameAddPowerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gameAddPowerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gameAddPowerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddPowerLabel)
-                    .addComponent(gameAddPowerCountLabel))
+                .addGroup(gameAddPowerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gameAddPowerCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddPowerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddPowerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        gameAddClicksCdBtn.setText("+");
+        gameAddClicksCdBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PROG11/utils/icons/arrow-up-20.png"))); // NOI18N
+        gameAddClicksCdBtn.setMaximumSize(new java.awt.Dimension(30, 30));
+        gameAddClicksCdBtn.setMinimumSize(new java.awt.Dimension(30, 30));
+        gameAddClicksCdBtn.setPreferredSize(new java.awt.Dimension(30, 30));
         gameAddClicksCdBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameAddClicksCdBtnActionPerformed(evt);
@@ -138,20 +146,23 @@ public class GameFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameAddClicksCdLabel)
                 .addGap(18, 18, 18)
-                .addComponent(gameAddClicksCdCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                .addComponent(gameAddClicksCdCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         gameAddClicksCdPanelLayout.setVerticalGroup(
             gameAddClicksCdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gameAddClicksCdPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gameAddClicksCdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gameAddClicksCdBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddClicksCdLabel)
-                    .addComponent(gameAddClicksCdCountLabel))
+                .addGroup(gameAddClicksCdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gameAddClicksCdCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddClicksCdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddClicksCdBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        gameAddMulticlickBtn.setText("+");
+        gameAddMulticlickBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PROG11/utils/icons/arrow-up-20.png"))); // NOI18N
+        gameAddMulticlickBtn.setMaximumSize(new java.awt.Dimension(30, 30));
+        gameAddMulticlickBtn.setMinimumSize(new java.awt.Dimension(30, 30));
+        gameAddMulticlickBtn.setPreferredSize(new java.awt.Dimension(30, 30));
         gameAddMulticlickBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameAddMulticlickBtnActionPerformed(evt);
@@ -161,6 +172,9 @@ public class GameFrame extends javax.swing.JFrame {
         gameAddMulticlickLabel.setText("Click simultaneo");
 
         gameAddMulticlickCountLabel.setText("0");
+        gameAddMulticlickCountLabel.setMaximumSize(new java.awt.Dimension(35, 16));
+        gameAddMulticlickCountLabel.setMinimumSize(new java.awt.Dimension(35, 16));
+        gameAddMulticlickCountLabel.setPreferredSize(new java.awt.Dimension(35, 16));
 
         javax.swing.GroupLayout gameAddMulticlickPanelLayout = new javax.swing.GroupLayout(gameAddMulticlickPanel);
         gameAddMulticlickPanel.setLayout(gameAddMulticlickPanelLayout);
@@ -172,53 +186,16 @@ public class GameFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameAddMulticlickLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(gameAddMulticlickCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(gameAddMulticlickCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         gameAddMulticlickPanelLayout.setVerticalGroup(
             gameAddMulticlickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gameAddMulticlickPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(gameAddMulticlickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gameAddMulticlickBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddMulticlickLabel)
-                    .addComponent(gameAddMulticlickCountLabel))
-                .addContainerGap())
-        );
-
-        gameAddAutoclickBtn.setText("+");
-        gameAddAutoclickBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gameAddAutoclickBtnActionPerformed(evt);
-            }
-        });
-
-        gameAddAutoclickLabel.setText("Autoclick");
-
-        gameAddAutoclickCountLabel.setText("false");
-        gameAddAutoclickCountLabel.setMaximumSize(new java.awt.Dimension(25, 16));
-        gameAddAutoclickCountLabel.setMinimumSize(new java.awt.Dimension(25, 16));
-        gameAddAutoclickCountLabel.setPreferredSize(new java.awt.Dimension(25, 16));
-
-        javax.swing.GroupLayout gameAddAutoclickPanelLayout = new javax.swing.GroupLayout(gameAddAutoclickPanel);
-        gameAddAutoclickPanel.setLayout(gameAddAutoclickPanelLayout);
-        gameAddAutoclickPanelLayout.setHorizontalGroup(
-            gameAddAutoclickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gameAddAutoclickPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gameAddAutoclickBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gameAddAutoclickLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(gameAddAutoclickCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        gameAddAutoclickPanelLayout.setVerticalGroup(
-            gameAddAutoclickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gameAddAutoclickPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(gameAddAutoclickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gameAddAutoclickBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddAutoclickLabel)
-                    .addComponent(gameAddAutoclickCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(gameAddMulticlickPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gameAddMulticlickCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddMulticlickLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameAddMulticlickBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -231,8 +208,7 @@ public class GameFrame extends javax.swing.JFrame {
                 .addGroup(gamePowersLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gameAddPowerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gameAddClicksCdPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddMulticlickPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gameAddAutoclickPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(gameAddMulticlickPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         gamePowersLabelLayout.setVerticalGroup(
@@ -244,9 +220,7 @@ public class GameFrame extends javax.swing.JFrame {
                 .addComponent(gameAddClicksCdPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameAddMulticlickPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gameAddAutoclickPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         gameMonsterBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PROG11/utils/img/pinkslime/frame-1.png"))); // NOI18N
@@ -264,6 +238,28 @@ public class GameFrame extends javax.swing.JFrame {
 
         versionLabel.setText("v" + PROG11.funcionalidad.modelos.Texts.VERSION);
 
+        gameSaveProgress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        gameSaveProgress.setForeground(new java.awt.Color(0, 204, 51));
+        gameSaveProgress.setText("GUARDAR PROGRESO");
+        gameSaveProgress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameSaveProgressActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("¡Haz click en el monstruo!");
+
+        gameDeleteAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        gameDeleteAccount.setForeground(new java.awt.Color(255, 51, 51));
+        gameDeleteAccount.setText("BORRAR CUENTA");
+        gameDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameDeleteAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -273,7 +269,7 @@ public class GameFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(gameMonsterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(gameBackBtn)
                         .addGap(88, 88, 88)
@@ -284,12 +280,14 @@ public class GameFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(gameShowPowers)
-                        .addGap(74, 74, 74))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(gamePowersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(versionLabel))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(gamePowersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(versionLabel))
+                    .addComponent(gameSaveProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gameDeleteAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
@@ -308,9 +306,15 @@ public class GameFrame extends javax.swing.JFrame {
                     .addComponent(gameMonsterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(gamePowersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(gameSaveProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(gameDeleteAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(versionLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,82 +332,57 @@ public class GameFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gameBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameBackBtnActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        openMainFrame();
+        int resNewPlayer = JOptionPane.showConfirmDialog(this,
+                "AVISO: ¡Recuerde guardar su progreso! "
+                + "\n En la próxima sesión el contador de monedas comenzará de cero, pero las mejoras que haya obtenido y guardado, serán cargadas.",
+                "Confirmar acción: Volver a la pantalla de inicio",
+                JOptionPane.YES_NO_OPTION);
+
+        if (resNewPlayer == JOptionPane.YES_OPTION) {
+            setVisible(false);
+            openMainFrame();
+        }
     }//GEN-LAST:event_gameBackBtnActionPerformed
 
     private void gameMonsterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameMonsterBtnActionPerformed
-        // TODO add your handling code here:
         clickInMonster();
         addCoins();
     }//GEN-LAST:event_gameMonsterBtnActionPerformed
 
     private void gameAddPowerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddPowerBtnActionPerformed
-        // TODO add your handling code here:
         levelUpPower();
     }//GEN-LAST:event_gameAddPowerBtnActionPerformed
 
     private void gameAddClicksCdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddClicksCdBtnActionPerformed
-        // TODO add your handling code here:
         levelUpClickCooldown();
     }//GEN-LAST:event_gameAddClicksCdBtnActionPerformed
 
     private void gameAddMulticlickBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddMulticlickBtnActionPerformed
-        // TODO add your handling code here:
         levelUpMulticlick();
     }//GEN-LAST:event_gameAddMulticlickBtnActionPerformed
 
-    private void gameAddAutoclickBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameAddAutoclickBtnActionPerformed
-        // TODO add your handling code here:
-        levelUpAutoclick();
-    }//GEN-LAST:event_gameAddAutoclickBtnActionPerformed
-
     private void gameShowPowersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameShowPowersActionPerformed
-        // TODO add your handling code here:
         tooglePowersups();
     }//GEN-LAST:event_gameShowPowersActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GameFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GameFrame().setVisible(true);
-//            }
-//        });
-//    }
+    private void gameSaveProgressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameSaveProgressActionPerformed
+        saveProgress();
+    }//GEN-LAST:event_gameSaveProgressActionPerformed
 
+    private void gameDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameDeleteAccountActionPerformed
+        int resNewPlayer = JOptionPane.showConfirmDialog(this,
+                "¿Seguro que desea borrar esta cuenta?",
+                "Confirmar acción: Borrado de cuenta",
+                JOptionPane.YES_NO_OPTION);
+
+        if (resNewPlayer == JOptionPane.YES_OPTION) {
+
+            deletePlayer(Token.currentPlayer);
+            setVisible(false);
+            openMainFrame();
+        }
+    }//GEN-LAST:event_gameDeleteAccountActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton gameAddAutoclickBtn;
-    public static javax.swing.JLabel gameAddAutoclickCountLabel;
-    private javax.swing.JLabel gameAddAutoclickLabel;
-    private javax.swing.JPanel gameAddAutoclickPanel;
     private javax.swing.JButton gameAddClicksCdBtn;
     public static javax.swing.JLabel gameAddClicksCdCountLabel;
     private javax.swing.JLabel gameAddClicksCdLabel;
@@ -419,9 +398,12 @@ public class GameFrame extends javax.swing.JFrame {
     private javax.swing.JButton gameBackBtn;
     private javax.swing.JLabel gameCoinIconLabel;
     public static javax.swing.JLabel gameCoinNumberLabel;
+    private javax.swing.JButton gameDeleteAccount;
     public static javax.swing.JButton gameMonsterBtn;
     public static javax.swing.JPanel gamePowersLabel;
+    private javax.swing.JButton gameSaveProgress;
     private javax.swing.JButton gameShowPowers;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables

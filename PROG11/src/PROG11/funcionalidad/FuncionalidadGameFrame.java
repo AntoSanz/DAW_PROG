@@ -4,15 +4,18 @@
  */
 package PROG11.funcionalidad;
 
+import static PROG11.conexiones.oracle.OracleConnextion.updatePlayer;
 import PROG11.entornografico.GameFrame;
 import PROG11.entornografico.MainFrame;
+import static PROG11.funcionalidad.Funcionalidad.updatePlayerToken;
 import static PROG11.funcionalidad.TempoControl.tempoClickInMonster;
+import PROG11.funcionalidad.modelos.Token;
 import PROG11.funcionalidad.modelos.Values;
 import javax.swing.JPanel;
 
 /**
  *
- * @author ANTO
+ * @author ANTONIO SANZ PANS
  */
 public class FuncionalidadGameFrame {
 
@@ -21,6 +24,7 @@ public class FuncionalidadGameFrame {
     private static int cooldownLevel = 0;
     private static int multiclickLevel = 0;
     private static boolean autoclick = false;
+    private static int score = 0;
 
     /**
      * Reinicia los valores de las variables
@@ -31,17 +35,31 @@ public class FuncionalidadGameFrame {
         cooldownLevel = 0;
         multiclickLevel = 0;
         autoclick = false;
-        updateAllLabels();
+        setUpdatedValues();
     }
-
+    /**
+     * Importa los valores del token en los campos correspondientes
+     */
+    public static void updateValuesWhitToken() {
+        if (Token.currentPlayer != null) {
+            powerLevel = Token.currentPlayer.getPower();
+            cooldownLevel = Token.currentPlayer.getCooldown();
+            multiclickLevel = Token.currentPlayer.getMulticlick();
+            autoclick = Token.currentPlayer.isAutoclick();
+            coins = 0;
+            setUpdatedValues();
+        }
+    }
+    
     //Actualizar labels
-    public static void updateAllLabels() {
+    public static void setUpdatedValues() {
         setCoinLabel();
         setPowerLabel();
         setCooldownLabel();
         setMulticlickLabel();
-        setAutoclickLabel();
     }
+
+
 
     public static void setCoinLabel() {
         GameFrame.gameCoinNumberLabel.setText(Integer.toString(coins));
@@ -59,14 +77,12 @@ public class FuncionalidadGameFrame {
         GameFrame.gameAddMulticlickCountLabel.setText(Integer.toString(multiclickLevel));
     }
 
-    public static void setAutoclickLabel() {
-        GameFrame.gameAddAutoclickCountLabel.setText(Boolean.toString(autoclick));
-        GameFrame.gameAddAutoclickBtn.setVisible(!autoclick);
-    }
-
     //Funcionamiento
     public static void clickInMonster() {
-        addCoins();
+        //Añade tantas monedas como multiclics haya
+        for (int i = 0; i < multiclickLevel; i++) {
+            addCoins();
+        }
         Values v = new Values();
         int delay = v.getCooldown(cooldownLevel);
         tempoClickInMonster(delay);
@@ -101,6 +117,7 @@ public class FuncionalidadGameFrame {
             powerLevel++;
             setCoinLabel();
             setPowerLabel();
+            updatePlayerToken("power", powerLevel);
         } else {
             System.out.println("DEBUG: No hay monedas suficientes");
         }
@@ -119,6 +136,8 @@ public class FuncionalidadGameFrame {
             cooldownLevel++;
             setCoinLabel();
             setCooldownLabel();
+            updatePlayerToken("cooldown", cooldownLevel);
+
         } else {
             System.out.println("DEBUG: No hay monedas suficientes");
         }
@@ -133,6 +152,8 @@ public class FuncionalidadGameFrame {
             multiclickLevel++;
             setCoinLabel();
             setMulticlickLabel();
+            updatePlayerToken("multiclick", multiclickLevel);
+
         } else {
             System.out.println("DEBUG: No hay monedas suficientes");
         }
@@ -150,7 +171,9 @@ public class FuncionalidadGameFrame {
             coins = coins - cost;
             autoclick = true;
             setCoinLabel();
-            setAutoclickLabel();
+            //setAutoclickLabel();
+            updatePlayerToken("autoclick", autoclick == true ? 1 : 0);
+
         } else {
             System.out.println("DEBUG: No hay monedas suficientes");
         }
@@ -166,5 +189,13 @@ public class FuncionalidadGameFrame {
         } else {
             GameFrame.gamePowersLabel.setVisible(true);
         }
+    }
+
+    public static void saveProgress() {
+        updatePlayer(Token.currentPlayer);
+    }
+
+    public static void automaticGrouth(){
+        
     }
 }
